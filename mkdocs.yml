@@ -1,0 +1,47 @@
+site_name: WisperZ_Blogs
+site_author: WisperZ
+site_description: 个人知识库与博客
+# Copyright
+copyright: Copyright &copy; 2026 - 2028 Martin Donath
+
+markdown_extensions: #Markdown拓展,添加之后可以支持更多的Markdown语法#
+  - pymdownx.arithmatex
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.inlinehilite
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tabbed
+  - pymdownx.tilde
+  
+
+theme:
+  name: "material" #使用Mkdocs-Material主题#
+    
+  palette:
+    - media: "(prefers-color-scheme: light)"   # 浅色模式
+      scheme: default
+      primary: black        # 主色，标题、文字
+      accent: teal          # 强调色，按钮、链接等
+      toggle:
+        icon: material/weather-sunny
+        name: 切换到夜间模式
+
+    - media: "(prefers-color-scheme: dark)"    # 深色模式
+      scheme: slate
+      primary: teal         # 夜间主色
+      accent: cyan          # 夜间强调色，细节按钮、链接
+      toggle:
+        icon: material/weather-night
+        name: 切换到日间模式
+  language: zh
