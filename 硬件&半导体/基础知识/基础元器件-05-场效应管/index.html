@@ -1,0 +1,2963 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="个人知识库与博客">
+      
+      
+        <meta name="author" content="WisperZ">
+      
+      
+      
+        <link rel="prev" href="../%E5%9F%BA%E6%9C%AC%E5%85%83%E5%99%A8%E4%BB%B6-04-%E6%99%B6%E4%BD%93%E4%B8%89%E6%9E%81%E7%AE%A1/">
+      
+      
+        <link rel="next" href="../../%E5%B5%8C%E5%85%A5%E5%BC%8F%E6%A8%A1%E5%9D%97/%E5%B5%8C%E5%85%A5%E5%BC%8F%E6%A8%A1%E5%9D%97-00-LoRa/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>基础元器件 05 场效应管 - WisperZ_Blogs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+  
+  
+    
+      
+      
+        
+      
+      
+    
+  
+    
+      
+      
+        
+      
+      
+    
+  
+    
+      
+      
+        
+      
+      
+    
+  
+  
+  <style>:root{.md-tag.md-tag--default-tag{--md-tag-icon:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20512%20512%22%3E%3C%21--%21%20Font%20Awesome%20Free%207.1.0%20by%20%40fontawesome%20-%20https%3A//fontawesome.com%20License%20-%20https%3A//fontawesome.com/license/free%20%28Icons%3A%20CC%20BY%204.0%2C%20Fonts%3A%20SIL%20OFL%201.1%2C%20Code%3A%20MIT%20License%29%20Copyright%202025%20Fonticons%2C%20Inc.--%3E%3Cpath%20d%3D%22M32.5%2096v149.5c0%2017%206.7%2033.3%2018.7%2045.3l192%20192c25%2025%2065.5%2025%2090.5%200l149.5-149.5c25-25%2025-65.5%200-90.5l-192-192C279.2%2038.7%20263%2032%20246%2032H96.5c-35.3%200-64%2028.7-64%2064m112%2016a32%2032%200%201%201%200%2064%2032%2032%200%201%201%200-64%22/%3E%3C/svg%3E');}.md-tag.md-tag--hardware-tag{--md-tag-icon:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20512%20512%22%3E%3C%21--%21%20Font%20Awesome%20Free%207.1.0%20by%20%40fontawesome%20-%20https%3A//fontawesome.com%20License%20-%20https%3A//fontawesome.com/license/free%20%28Icons%3A%20CC%20BY%204.0%2C%20Fonts%3A%20SIL%20OFL%201.1%2C%20Code%3A%20MIT%20License%29%20Copyright%202025%20Fonticons%2C%20Inc.--%3E%3Cpath%20d%3D%22M176%2024c0-13.3-10.7-24-24-24s-24%2010.7-24%2024v40c-35.3%200-64%2028.7-64%2064H24c-13.3%200-24%2010.7-24%2024s10.7%2024%2024%2024h40v56H24c-13.3%200-24%2010.7-24%2024s10.7%2024%2024%2024h40v56H24c-13.3%200-24%2010.7-24%2024s10.7%2024%2024%2024h40c0%2035.3%2028.7%2064%2064%2064v40c0%2013.3%2010.7%2024%2024%2024s24-10.7%2024-24v-40h56v40c0%2013.3%2010.7%2024%2024%2024s24-10.7%2024-24v-40h56v40c0%2013.3%2010.7%2024%2024%2024s24-10.7%2024-24v-40c35.3%200%2064-28.7%2064-64h40c13.3%200%2024-10.7%2024-24s-10.7-24-24-24h-40v-56h40c13.3%200%2024-10.7%2024-24s-10.7-24-24-24h-40v-56h40c13.3%200%2024-10.7%2024-24s-10.7-24-24-24h-40c0-35.3-28.7-64-64-64V24c0-13.3-10.7-24-24-24s-24%2010.7-24%2024v40h-56V24c0-13.3-10.7-24-24-24s-24%2010.7-24%2024v40h-56zm-16%20104h192c17.7%200%2032%2014.3%2032%2032v192c0%2017.7-14.3%2032-32%2032H160c-17.7%200-32-14.3-32-32V160c0-17.7%2014.3-32%2032-32m16%2048v160h160V176z%22/%3E%3C/svg%3E');}.md-tag.md-tag--software-tag{--md-tag-icon:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20640%20512%22%3E%3C%21--%21%20Font%20Awesome%20Free%207.1.0%20by%20%40fontawesome%20-%20https%3A//fontawesome.com%20License%20-%20https%3A//fontawesome.com/license/free%20%28Icons%3A%20CC%20BY%204.0%2C%20Fonts%3A%20SIL%20OFL%201.1%2C%20Code%3A%20MIT%20License%29%20Copyright%202025%20Fonticons%2C%20Inc.--%3E%3Cpath%20d%3D%22M64%2096c0-35.3%2028.7-64%2064-64h384c35.3%200%2064%2028.7%2064%2064v240h-64V96H128v240H64zM0%20403.2C0%20392.6%208.6%20384%2019.2%20384h601.6c10.6%200%2019.2%208.6%2019.2%2019.2%200%2042.4-34.4%2076.8-76.8%2076.8H76.8C34.4%20480%200%20445.6%200%20403.2M281%20209l-31%2031%2031%2031c9.4%209.4%209.4%2024.6%200%2033.9s-24.6%209.4-33.9%200l-48-48c-9.4-9.4-9.4-24.6%200-33.9l48-48c9.4-9.4%2024.6-9.4%2033.9%200s9.4%2024.6%200%2033.9zm112-34%2048%2048c9.4%209.4%209.4%2024.6%200%2033.9l-48%2048c-9.4%209.4-24.6%209.4-33.9%200s-9.4-24.6%200-33.9l31-31-31-31c-9.4-9.4-9.4-24.6%200-33.9s24.6-9.4%2033.9%200z%22/%3E%3C/svg%3E');}}</style>
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="grey" data-md-color-accent="grey">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#mos" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="WisperZ_Blogs" class="md-header__button md-logo" aria-label="WisperZ_Blogs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 89 89">
+  <path d="M3.136,17.387l0,42.932l42.932,21.467l-42.932,-64.399Z" />
+  <path d="M21.91,8l42.933,64.398l-18.775,9.388l-42.932,-64.399l18.774,-9.387Z" style="fill-opacity: 0.5" />
+  <path d="M67.535,17.387l-27.262,18.156l21.878,32.818l5.384,2.691l0,-53.665Z" />
+  <path d="M67.535,17.387l0,53.666l18.774,-9.388l0,-53.665l-18.774,9.387Z" style="fill-opacity: 0.25" />
+</svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            WisperZ_Blogs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              基础元器件 05 场效应管
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="grey" data-md-color-accent="grey"  aria-label="切换到夜间模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到夜间模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="black"  aria-label="切换到日间模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到日间模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5M7 15a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l137.3-137.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../%E5%9F%BA%E6%9C%AC%E5%85%83%E5%99%A8%E4%BB%B6-00-%E7%94%B5%E9%98%BB/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  硬件&半导体
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="WisperZ_Blogs" class="md-nav__button md-logo" aria-label="WisperZ_Blogs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 89 89">
+  <path d="M3.136,17.387l0,42.932l42.932,21.467l-42.932,-64.399Z" />
+  <path d="M21.91,8l42.933,64.398l-18.775,9.388l-42.932,-64.399l18.774,-9.387Z" style="fill-opacity: 0.5" />
+  <path d="M67.535,17.387l-27.262,18.156l21.878,32.818l5.384,2.691l0,-53.665Z" />
+  <path d="M67.535,17.387l0,53.666l18.774,-9.388l0,-53.665l-18.774,9.387Z" style="fill-opacity: 0.25" />
+</svg>
+
+    </a>
+    WisperZ_Blogs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    硬件&半导体
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    硬件&半导体
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础知识
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    基础知识
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%9F%BA%E6%9C%AC%E5%85%83%E5%99%A8%E4%BB%B6-00-%E7%94%B5%E9%98%BB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基本元器件 00 电阻
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--Done"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%9F%BA%E6%9C%AC%E5%85%83%E5%99%A8%E4%BB%B6-01-%E7%94%B5%E5%AE%B9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基本元器件 01 电容
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--Done"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%9F%BA%E6%9C%AC%E5%85%83%E5%99%A8%E4%BB%B6-02-%E7%94%B5%E6%84%9F%E4%B8%8E%E7%A3%81%E7%8F%A0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基本元器件 02 电感与磁珠
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%9F%BA%E6%9C%AC%E5%85%83%E5%99%A8%E4%BB%B6-03-%E4%BA%8C%E6%9E%81%E7%AE%A1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基本元器件 03 二极管
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%9F%BA%E6%9C%AC%E5%85%83%E5%99%A8%E4%BB%B6-04-%E6%99%B6%E4%BD%93%E4%B8%89%E6%9E%81%E7%AE%A1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基本元器件 04 晶体三极管
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础元器件 05 场效应管
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础元器件 05 场效应管
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#mos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MOS 管的种类及结构
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mos_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MOS 管工作原理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MOS 管工作原理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#n" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        N 沟道增强型场效应管原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        P沟道增强型场效应管原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#n_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        N沟道耗尽型场效应管原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        P沟道耗尽型场效应管原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mos_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        耗尽型与增强型MOS管的区别
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mos_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MOS管重要特性
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MOS管重要特性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        导通特性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        损失特性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        寄生电容驱动特性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        寄生二极管
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mos_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        不同耐压MOS管特点
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mosibgt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MOS管与三极管、IBGT的差别
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MOS管与三极管、IBGT的差别">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mos_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MOS管与三极管的差别
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mosibgt_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MOS管与IBGT的差别
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mos_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MOS管主要参数
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MOS管主要参数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        最大额定参数
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="最大额定参数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vdsvdss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VDS/VDSS 最大漏源电压
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vgs-vgss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VGS/ VGSS 最大栅源电压
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ID 连续漏电流
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#idmidsm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IDM/IDSM 脉冲漏极电流/最大漏源电流
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pdsm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PDSM 最大耗散功率
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tjtstg" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TJ、TSTG 工作温度和存储环境温度的范围
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EAS 单脉冲雪崩击穿能量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ear" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EAR 重复雪崩能量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IAR 雪崩击穿电流
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#soa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SOA 安全工作区
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        静态电特性
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="静态电特性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vbrdssvbdss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        V(BR)DSS/VBDSS 漏源击穿电压(破坏电压)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bvgs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BVGS 栅源击穿电压
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vgsth" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VGS(th)阈值电压
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vgsoff" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VGS(off) 夹断电压
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rdson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RDS(on) 导通电阻
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rgs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RGS 栅源电阻
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#idss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IDSS 零栅压漏极电流
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#igss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IGSS 栅源漏电流
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        动态电特性
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="动态电特性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ciss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ciss 输入电容
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coss 输出电容
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#crss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crss 反向传输电容
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eoss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Eoss 输出电容存储能量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#didt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        di/dt 电流上升率
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qgsqgdqg" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Qgs、Qgd和Qg（栅极电荷值）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tdon" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        td(on) 导通延时时间
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tdoff" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        td(off) 关断延时时间
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tr 上升时间
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tf 下降时间
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NF 低频噪声系数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        gM 跨导
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        其他重要参数
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mos_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MOS 管判断
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MOS 管判断">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三个极怎么判定
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#n-p" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        是 N 沟道还是 P 沟道
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="是 N 沟道还是 P 沟道">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#n_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        N 沟道
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        P 沟道
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        寄生二极管的方向如何判定
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mos_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MOS 管用作开关时在电路中的连接方法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        应用
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        使用场景
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    嵌入式模块
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    嵌入式模块
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%B5%8C%E5%85%A5%E5%BC%8F%E6%A8%A1%E5%9D%97/%E5%B5%8C%E5%85%A5%E5%BC%8F%E6%A8%A1%E5%9D%97-00-LoRa/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    嵌入式模块 00 LoRa
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    通信协议
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    通信协议
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE-00-UART/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    通信协议 00 UART
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--Done"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE-01-I2C/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    通信协议 01 I2C
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--Done"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE-02-SPI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    通信协议 02 SPI
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--Done"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#mos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MOS 管的种类及结构
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mos_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MOS 管工作原理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MOS 管工作原理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#n" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        N 沟道增强型场效应管原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        P沟道增强型场效应管原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#n_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        N沟道耗尽型场效应管原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        P沟道耗尽型场效应管原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mos_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        耗尽型与增强型MOS管的区别
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mos_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MOS管重要特性
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MOS管重要特性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        导通特性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        损失特性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        寄生电容驱动特性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        寄生二极管
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mos_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        不同耐压MOS管特点
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mosibgt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MOS管与三极管、IBGT的差别
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MOS管与三极管、IBGT的差别">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mos_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MOS管与三极管的差别
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mosibgt_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MOS管与IBGT的差别
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mos_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MOS管主要参数
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MOS管主要参数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        最大额定参数
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="最大额定参数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vdsvdss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VDS/VDSS 最大漏源电压
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vgs-vgss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VGS/ VGSS 最大栅源电压
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ID 连续漏电流
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#idmidsm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IDM/IDSM 脉冲漏极电流/最大漏源电流
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pdsm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PDSM 最大耗散功率
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tjtstg" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TJ、TSTG 工作温度和存储环境温度的范围
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EAS 单脉冲雪崩击穿能量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ear" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EAR 重复雪崩能量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IAR 雪崩击穿电流
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#soa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SOA 安全工作区
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        静态电特性
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="静态电特性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vbrdssvbdss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        V(BR)DSS/VBDSS 漏源击穿电压(破坏电压)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bvgs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BVGS 栅源击穿电压
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vgsth" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VGS(th)阈值电压
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vgsoff" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VGS(off) 夹断电压
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rdson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RDS(on) 导通电阻
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rgs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RGS 栅源电阻
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#idss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IDSS 零栅压漏极电流
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#igss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IGSS 栅源漏电流
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        动态电特性
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="动态电特性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ciss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ciss 输入电容
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coss 输出电容
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#crss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crss 反向传输电容
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eoss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Eoss 输出电容存储能量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#didt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        di/dt 电流上升率
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qgsqgdqg" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Qgs、Qgd和Qg（栅极电荷值）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tdon" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        td(on) 导通延时时间
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tdoff" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        td(off) 关断延时时间
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tr 上升时间
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tf 下降时间
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NF 低频噪声系数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        gM 跨导
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        其他重要参数
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mos_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MOS 管判断
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MOS 管判断">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三个极怎么判定
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#n-p" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        是 N 沟道还是 P 沟道
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="是 N 沟道还是 P 沟道">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#n_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        N 沟道
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        P 沟道
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        寄生二极管的方向如何判定
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mos_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MOS 管用作开关时在电路中的连接方法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        应用
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        使用场景
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="导航栏" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../%E5%9F%BA%E6%9C%AC%E5%85%83%E5%99%A8%E4%BB%B6-00-%E7%94%B5%E9%98%BB/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    硬件&半导体
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../%E5%9F%BA%E6%9C%AC%E5%85%83%E5%99%A8%E4%BB%B6-00-%E7%94%B5%E9%98%BB/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    基础知识
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>基础元器件 05 场效应管</h1>
+
+<h2 id="mos">MOS 管的种类及结构</h2>
+<p>MOS 管是 FET（场效应管）的一种（另一种为 JFET 结型场效应管），主要有两种结构形式：N 沟道型和 P 沟道型；又根据场效应原理的不同，分为耗尽型（当栅压为零时有较大漏极电流）和增强型（当栅压为零，漏极电流也为零，必须再加一定的栅压之后才有漏极电流）两种。因此，MOS 管可以被制构成 P 沟道增强型、P 沟道耗尽型、N 沟道增强型、N 沟道耗尽型 4 种类型产品。
+<img alt="" src="../_resources/%E5%9F%BA%E6%9C%AC%E5%85%83%E5%99%A8%E4%BB%B6-05-%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1/%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1-00.jpg" />
+每一个 MOS 管都提供有三个电极：
+- Gate 栅极（表示为“G”）
+- Source 源极（表示为“S”）
+- Drain 漏极（表示为“D”）
+<strong>接线时，对于 N 沟道的电源输入为 D，输出为 S</strong>；<strong>P 沟道的电源输入为 S，输出为 D</strong>；且增强型、耗尽型的接法基本一样。</p>
+<p><img alt="" src="../_resources/%E5%9F%BA%E6%9C%AC%E5%85%83%E5%99%A8%E4%BB%B6-05-%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1/%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1-01.jpg" />
+从结构图可发现，N 沟道型场效应管的源极和漏极接在 N 型半导体上，而 P 沟道型场效应管的源极和漏极则接在 P 型半导体上。场效应管输出电流由输入的电压（或称场电压）控制，其输入的电流极小或没有电流输入，使得该器件有很高的输入阻抗，这也是 MOS 管被称为场效应管的重要原因。</p>
+<h2 id="mos_1">MOS 管工作原理</h2>
+<h3 id="n">N 沟道增强型场效应管原理</h3>
+<p>N沟道增强型MOS管在P型半导体上生成一层SiO2薄膜绝缘层，然后用光刻工艺扩散两个高掺杂的N型区，从N型区引出电极（漏极D、源极S）；在源极和漏极之间的SiO2绝缘层上镀一层金属铝作为栅极G；P型半导体称为衬底，用符号B表示。由于栅极与其它电极之间是相互绝缘的，所以NMOS又被称为绝缘栅型场效应管。</p>
+<p>当栅极G和源极S之间不加任何电压，即VGS=0时，由于漏极和源极两个N+型区之间隔有P型衬底，相当于两个背靠背连接的PN结，它们之间的电阻高达1012Ω，即D、S之间不具备导电的沟道，所以无论在漏、源极之间加何种极性的电压，都不会产生漏极电流ID。
+<img alt="" src="../_resources/%E5%9F%BA%E6%9C%AC%E5%85%83%E5%99%A8%E4%BB%B6-05-%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1/%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1-02.jpg" /></p>
+<p>当将衬底B与源极S短接，在栅极G和源极S之间加正电压，即VGS＞0时，如下图（a）所示，则在栅极与衬底之间产生一个由栅极指向衬底的电场。在这个电场的作用下，P衬底表面附近的空穴受到排斥将向下方运动，电子受电场的吸引向衬底表面运动，与衬底表面的空穴复合，形成了一层耗尽层。</p>
+<p>如果进一步提高VGS电压，使VGS达到某一电压VT时，P衬底表面层中空穴全部被排斥和耗尽，而自由电子大量地被吸引到表面层，由量变到质变，使表面层变成了自由电子为多子的N型层，称为“反型层”，如下图（b）所示。</p>
+<p>反型层将漏极D和源极S两个N+型区相连通，构成了漏、源极之间的N型导电沟道。把开始形成导电沟道所需的VGS值称为阈值电压或开启电压，用VGS（th）表示。显然，只有VGS＞VGS（th）时才有沟道，而且VGS越大，沟道越厚，沟道的导通电阻越小，导电能力越强；“增强型”一词也由此得来。</p>
+<p><img alt="" src="../_resources/%E5%9F%BA%E6%9C%AC%E5%85%83%E5%99%A8%E4%BB%B6-05-%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1/%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1-03.jpg" />]]</p>
+<ul>
+<li><strong>阈值电压 VGS (th)</strong>：这是形成导电沟道所需的最小栅极电压。</li>
+<li><strong>反型层</strong>：当 VGS 大于 VGS (th) 时，P 型衬底表面形成的 N 型导电层。</li>
+<li><strong>导通电阻</strong>：随着 VGS 增加，导电沟道变厚，导通电阻减小。</li>
+</ul>
+<p>在VGS＞VGS（th）的条件下，如果在漏极D和源极S之间加上正电压VDS，导电沟道就会有电流流通。漏极电流由漏区流向源区，因为沟道有一定的电阻，所以沿着沟道产生电压降，使沟道各点的电位沿沟道由漏区到源区逐渐减小，靠近漏区一端的电压VGD最小，其值为VGD=VGS－VDS，相应的沟道最薄；靠近源区一端的电压最大，等于VGS，相应的沟道最厚。</p>
+<p>这样就使得沟道厚度不再是均匀的，整个沟道呈倾斜状。随着VDS的增大，靠近漏区D一端的沟道越来越薄。</p>
+<p>当VDS增大到某一临界值，使VGD≤VGS（th）时，漏端的沟道消失，只剩下耗尽层，把这种情况称为沟道“预夹断”，如下图（a）所示。继续增大VDS[即VDS＞VGS－VGS（th）]，夹断点向源极方向移动，如下图（b）所示。</p>
+<p>尽管夹断点在移动，但沟道区（源极S到夹断点）的电压降保持不变，仍等于VGS－VGS（th）。因此，VDS多余部分电压[VDS－（VGS－VGS（th））]全部降到夹断区上，在夹断区内形成较强的电场。这时电子沿沟道从源极流向夹断区，当电子到达夹断区边缘时，受夹断区强电场的作用，会很快的漂移到漏极。</p>
+<p><img alt="" src="../_resources/%E5%9F%BA%E6%9C%AC%E5%85%83%E5%99%A8%E4%BB%B6-05-%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1/%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1-04.jpg" /></p>
+<ul>
+<li>
+<p>图(a) 预夹断</p>
+<ul>
+<li><strong>VGD = VGS - VDS ≤ VGS(th)</strong>：漏极端沟道变薄甚至消失，形成耗尽层。</li>
+<li><strong>导电沟道</strong>：存在于源极到预夹断点之间。</li>
+</ul>
+</li>
+<li>
+<p>图(b) 夹断区形成</p>
+<ul>
+<li><strong>夹断点移动</strong>：VDS &gt; VGS - VGS(th)，夹断点向源极方向移动。</li>
+<li><strong>强电场区</strong>：夹断区形成较强电场，电子快速漂移。</li>
+</ul>
+</li>
+<li>
+<p><strong>VGS调制沟道厚度</strong>：VGS决定沟道的厚度和电阻，正电压使沟道变宽，负电压使沟道变窄。</p>
+</li>
+<li><strong>VDS影响沟道形状</strong>：VDS增大时，沟道厚度不再均匀，靠近漏极的沟道变薄，甚至形成夹断区。</li>
+<li><strong>夹断现象</strong>：当VDS &gt; VGS－VGS(th)时，漏极端的沟道消失，形成夹断区，电子在夹断区内快速漂移到漏极。</li>
+</ul>
+<h3 id="p">P沟道增强型场效应管原理</h3>
+<p>P沟道增强型MOS管因在N型衬底中生成P型反型层而得名，其通过光刻、扩散的方法或其他手段，在N型衬底（基片）上制作出两个掺杂的P区，分别引出电极（源极S和漏极D），同时在漏极与源极之间的SiO2绝缘层上制作金属栅极G。其结构和工作原理与N沟道MOS管类似；只是使用的栅-源和漏-源电压极性与N沟道MOS管相反。</p>
+<p>在正常工作时，P沟道增强型MOS管的衬底必须与源极相连，而漏极对源极的电压VDS应为负值，以保证两个P区与衬底之间的PN结均为反偏，同时为了在衬底顶表面附近形成导电沟道，栅极对源极的电压也应为负。</p>
+<p><img alt="" src="../_resources/%E5%9F%BA%E6%9C%AC%E5%85%83%E5%99%A8%E4%BB%B6-05-%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1/%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1-05.jpg" /></p>
+<p>当VDS=0时。在栅源之间加负电压比，由于绝缘层的存在，故没有电流，但是金属栅极被补充电而聚集负电荷，N型半导体中的多子电子被负电荷排斥向体内运动，表面留下带正电的离子，形成耗尽层。</p>
+<p>随着G、S间负电压的增加，耗尽层加宽，当VDS增大到一定值时，衬底中的空穴（少子）被栅极中的负电荷吸引到表面，在耗尽层和绝缘层之间形成一个P型薄层，称反型层，如下图（2）所示。</p>
+<p><img alt="" src="../_resources/%E5%9F%BA%E6%9C%AC%E5%85%83%E5%99%A8%E4%BB%B6-05-%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1/%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1-06.jpg" /></p>
+<p><strong>VDS ≠ 0</strong>：</p>
+<ul>
+<li>导电沟道已经形成，源极（S）和漏极（D）之间施加负电压（VDS &lt; 0）。</li>
+<li>漏极电流（ID）沿沟道流动，形成压降。</li>
+<li>沟道厚度从漏极到源极逐渐变窄。</li>
+</ul>
+<p>这个反型层就构成漏源之间的导电沟道，这时的VGS称为开启电压VGS（th），达到VGS（th）后再增加，衬底表面感应的空穴越多，反型层加宽，而耗尽层的宽度却不再变化，这样我们可以用VGS的大小控制导电沟道的宽度。</p>
+<p>当VDS≠0时。导电沟道形成以后，D、S间加负向电压时，那么在源极与漏极之间将有漏极电流ID流通，而且ID随VDS而增，ID沿沟道产生的压降使沟道上各点与栅极间的电压不再相等，该电压削弱了栅极中负电荷电场的作用，使沟道从漏极到源极逐渐变窄，如下图（1）所示。</p>
+<p>当VDS增大到使VGD=VGS（即VDS=VGS-VGS（TH）），沟道在漏极附近出现预夹断，如下图（2）所示。再继续增大VDS，夹断区只是稍有加长，而沟道电流基本上保持预夹断时的数值，其原因是当出现预夹断时再继续增大VDS，VDS的多余部分就全部加在漏极附近的夹断区上，故形成的漏极电流ID近似与VDS无关。</p>
+<p>![[./_resources/基本元器件-05-场效应管/场效应管-07.jpg]]</p>
+<ul>
+<li>
+<p><strong>预夹断状态</strong>：</p>
+<ul>
+<li>VDS增加到使VGD = VGS(th)，即VDS = VGS - VGS(th)。</li>
+<li>漏极附近的沟道变窄甚至消失，形成预夹断区。</li>
+</ul>
+</li>
+<li>
+<p><strong>夹断状态</strong>：</p>
+<ul>
+<li>继续增加VDS，夹断区变长，但沟道电流ID基本保持不变。</li>
+<li>VDS的多余电压全部加在夹断区，形成强电场。</li>
+</ul>
+</li>
+</ul>
+<p>要点总结
+- <strong>VDS ≠ 0时</strong>：
+    - 导电沟道形成，ID沿沟道流动，沟道厚度逐渐变窄。
+- <strong>预夹断状态</strong>：
+    - VDS增加到预夹断电压（VDS = VGS - VGS(th)），漏极附近的沟道变窄或消失。
+- <strong>夹断状态</strong>：
+    - 继续增加VDS，形成夹断区，ID保持不变，多余电压加在夹断区上。</p>
+<h3 id="n_1">N沟道耗尽型场效应管原理</h3>
+<p>N沟道耗尽型MOS管的结构与增强型MOS管结构类似，只有一点不同，就是N沟道耗尽型MOS管在栅极电压VGS=0时，沟道已经存在。这是因为N沟道是在制造过程中采用离子注入法预先在D、S之间衬底的表面、栅极下方的SiO2绝缘层中掺入了大量的金属正离子，该沟道亦称为初始沟道。</p>
+<p>当VGS＝0时，这些正离子已经感应出反型层，形成了沟道，所以只要有漏源电压，就有漏极电流存在；当VGS＞0时，将使ID进一步增加；VGS＜0时，随着VGS的减小，漏极电流逐渐减小，直至ID＝0。对应ID＝0的VGS称为夹断电压或阈值电压，用符号VGS（off）或Up表示。</p>
+<p>由于耗尽型MOSFET在VGS=0时，漏源之间的沟道已经存在，所以只要加上VDS，就有ID流通。如果增加正向栅压VGS，栅极与衬底之间的电场将使沟道中感应更多的电子，沟道变厚，沟道的电导增大。</p>
+<p>如果在栅极加负电压（即VGS＜0），就会在相对应的衬底表面感应出正电荷，这些正电荷抵消N沟道中的电子，从而在衬底表面产生一个耗尽层，使沟道变窄，沟道电导减小。当负栅压增大到某一电压VGS（off）时，耗尽区扩展到整个沟道，沟道完全被夹断（耗尽），这时即使VDS仍存在，也不会产生漏极电流，即ID=0。</p>
+<p><img alt="" src="../_resources/%E5%9F%BA%E6%9C%AC%E5%85%83%E5%99%A8%E4%BB%B6-05-%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1/%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1-08.jpg" /></p>
+<ul>
+<li><strong>初始沟道</strong>：<ul>
+<li>在VGS=0时，沟道已经存在。</li>
+<li>制造过程中在D、S之间的衬底表面和栅极下方的SiO2绝缘层中掺入大量金属正离子，形成初始沟道。</li>
+</ul>
+</li>
+<li><strong>电压对漏极电流（ID）的影响</strong>：<ul>
+<li><strong>VGS=0时</strong>：沟道存在，只要有VDS，就有漏极电流ID。</li>
+<li><strong>VGS＞0时</strong>：正向栅压使ID增加，沟道中感应更多电子，沟道变厚，电导增大。</li>
+<li><strong>VGS＜0时</strong>：负向栅压使ID减小，衬底表面感应出正电荷，抵消N沟道中的电子，形成耗尽层，沟道变窄，电导减小。</li>
+</ul>
+</li>
+<li><strong>夹断电压（VGS（off））</strong>：<ul>
+<li>当负栅压增加到某一电压VGS（off）时，耗尽层扩展到整个沟道，完全夹断沟道，ID=0。</li>
+</ul>
+</li>
+</ul>
+<h3 id="p_1">P沟道耗尽型场效应管原理</h3>
+<p>P沟道耗尽型MOS管的工作原理与N沟道耗尽型MOS管完全相同，只不过导电的载流子不同，供电电压极性也不同。</p>
+<h3 id="mos_2">耗尽型与增强型MOS管的区别</h3>
+<p>耗尽型与增强型的主要区别在于耗尽型MOS管在G端（Gate）不加电压时有导电沟道存在，而增强型MOS管只有在开启后，才会出现导电沟道；两者的控制方式也不一样，耗尽型MOS管的VGS（栅极电压）可以用正、零、负电压控制导通，而增强型MOS管必须使得VGS&gt;VGS（th）（栅极阈值电压）才行。</p>
+<p>由于耗尽型N沟道MOS管在SiO2绝缘层中掺有大量的Na+或K+正离子（制造P沟道耗尽型MOS管时掺入负离子），当VGS=0时，这些正离子产生的电场能在P型衬底中感应出足够的电子，形成N型导电沟道；当VGS&gt;0时，将产生较大的ID（漏极电流）；如果使VGS&lt;0，则它将削弱正离子所形成的电场，使N沟道变窄，从而使ID减小。</p>
+<p>这些特性使得耗尽型MOS管在实际应用中，当设备开机时可能会误触发MOS管，导致整机失效；不易被控制，使得其应用极少。</p>
+<p>因此，日常我们看到的NMOS、PMOS多为增强型MOS管；其中，PMOS可以很方便地用作高端驱动。不过PMOS由于存在导通电阻大、价格贵、替换种类少等问题，在高端驱动中，通常还是使用NMOS替代，这也是市面上无论是应用还是产品种类，增强型NMOS管最为常见的重要原因，尤其在开关电源和马达驱动的应用中，一般都用NMOS管。</p>
+<h2 id="mos_3">MOS管重要特性</h2>
+<h3 id="_1">导通特性</h3>
+<p>导通的意义是作为开关，相当于开关闭合。NMOS的特性，VGS大于一定的值就会导通，适用于源极接地时的情况（低端驱动），只需栅极电压达到4V或10V就可以了。PMOS的特性是，VGS小于一定的值就会导通，适用于源极接VCC时的情况（高端驱动）。</p>
+<h3 id="_2">损失特性</h3>
+<p>不管是NMOS还是PMOS，导通后都有导通电阻存在，电流就会被电阻消耗能量，这部分消耗的能量叫做导通损耗。小功率MOS管导通电阻一般在几毫欧至几十毫欧左右，选择导通电阻小的MOS管会减小导通损耗。</p>
+<p>MOS管在进行导通和截止时，两端的电压有一个降落过程，流过的电流有一个上升的过程，在这段时间内，MOS管的损失是电压和电流的乘积，这称之为开关损失。通常开关损失比导通损失大得多，而且开关频率越快，损失也越大。</p>
+<p>导通瞬间电压和电流的乘积越大，构成的损失也就越大。缩短开关时间，可以减小每次导通时的损失；降低开关频率，可以减小单位时间内的开关次数。这两种办法都可以减小开关损失。</p>
+<h3 id="_3">寄生电容驱动特性</h3>
+<p>⚠️upload failed, check dev console</p>
+<p>对电容的充电需要一个电流，由于对电容充电瞬间可以把电容看成短路，所以瞬间电流会比较大。选择/设计MOS管驱动时第一个要留意的是可提供瞬间短路电流的大小；第二个要留意的是，普遍用于高端驱动的NMOS，导通时需要栅极电压大于源极电压。</p>
+<p>而高端驱动的MOS管导通时源极电压与漏极电压（VCC）相同，所以这时栅极导通电压要比VCC高4V或10V，而且电压越高，导通速度越快，导通电阻也越小。</p>
+<p><img alt="" src="../_resources/%E5%9F%BA%E6%9C%AC%E5%85%83%E5%99%A8%E4%BB%B6-05-%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1/%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1-09.jpg" /></p>
+<h3 id="_4">寄生二极管</h3>
+<p>漏极和源极之间有一个寄生二极管，即“体二极管”，在驱动感性负载（如马达、继电器）应用中，主要用于保护回路。不过体二极管只在单个MOS管中存在，在集成电路芯片内部通常是没有的。</p>
+<p><img alt="" src="../_resources/%E5%9F%BA%E6%9C%AC%E5%85%83%E5%99%A8%E4%BB%B6-05-%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1/%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1-10.jpg" /></p>
+<h3 id="mos_4">不同耐压MOS管特点</h3>
+<p>不同耐压的MOS管，其导通电阻中各部分电阻比例分布不同。如耐压30V的MOS管，其外延层电阻仅为总导通电阻的29%，耐压600V的MOS管的外延层电阻则是总导通电阻的96.5%。</p>
+<p>不同耐压MOS管的区别主要在于，耐高压的MOS管其反应速度比耐低压的MOS管要慢，因此，它们的特性在实际应用中也表现出了不一样之处，如耐中低压MOS管只需要极低的栅极电荷就可以满足强大电流和大功率处理能力，除开关速度快之外，还具有开关损耗低的特点，特别适应PWM输出模式应用；而耐高压MOS管具有输入阻抗高的特性，在电子镇流器、电子变压器、开关电源方面应用较多。</p>
+<p><img alt="" src="../_resources/%E5%9F%BA%E6%9C%AC%E5%85%83%E5%99%A8%E4%BB%B6-05-%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1/%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1-11.jpg" /></p>
+<h3 id="mosibgt">MOS管与三极管、IBGT的差别</h3>
+<h4 id="mos_5">MOS管与三极管的差别</h4>
+<p>三极管全称为半导体三极管，它的主要作用就是将微小的信号中止放大。MOS管与三极管有着许多相近的地方，也有许多不同之处。</p>
+<p>首先是开关速度的不同。三极管工作时，两个PN结都会感应出电荷，当开关管处于导通状态时，三极管处于饱和状态，假设这时三极管截至，PN结感应的电荷要恢复到平衡状态，这个过程需求时间。而MOS由于工作方式不同，不需要恢复时间，因此可以用作高速开关管。</p>
+<p>其次是控制方式不同。MOS管是电压控制元件，而三级管是电流控制元件。在只允许从信号源取较少电流的情况下，应选用MOS管；而在信号电压较低，又允许从信号源取较多电流的条件下，应选用三极管。</p>
+<p>接着是载流子种类数量不同。电力电子技术中提及的单极器件是指只靠一种载流子导电的器件，双极器件是指靠两种载流子导电的器件。MOS管只应用了一种多数载流子导电，所以也称为单极型器件；而三极管是既有多数载流子，也应用少数载流子导电；是为双极型器件。</p>
+<p>第三是灵活性不同。有些MOS管的源极和漏极可以互换运用，栅压也可正可负，灵活性比三极管好。</p>
+<p>第四是集成能力不同。MOS管能在很小电流和很低电压的条件下工作，而且它的制造工艺可以很方便地把很多MOS管集成在一块硅片上，因此MOS管在大范围集成电路中得到了普遍的应用。</p>
+<p>第五是输入阻抗和噪声能力不同。MOS管具有较高输入阻抗和低噪声等优点，被普遍应用于各种电子设备中，特别用MOS管做整个电子设备的输入级，可以获得普通三极管很难达到的性能。</p>
+<p>最后是功耗损耗不同。同等情况下，采用MOS管时，功耗损耗低；而选用三极管时，功耗损耗要高出许多。</p>
+<p>当然，在使用成本上，MOS管要高于三极管，因此根据两种元件的特性，MOS管常用于高频高速电路、大电流场所，以及对基极或漏极控制电流比较敏感的中央区域；而三极管则用于低成本场所，达不到效果时才会考虑替换选用MOS管。</p>
+<p>MOS管与三极管的主要差异总结
+1. <strong>开关速度</strong>：
+    - <strong>MOS管</strong>：具有更快的开关速度，因为不需要恢复时间。
+    - <strong>三极管</strong>：开关速度较慢，因为PN结需要时间恢复到平衡状态。
+2. <strong>控制方式</strong>：
+    - <strong>MOS管</strong>：电压控制元件。适合用于信号源电流较小的情况。
+    - <strong>三极管</strong>：电流控制元件。适合用于信号电压较低、允许较大电流的情况。
+3. <strong>载流子种类</strong>：
+    - <strong>MOS管</strong>：单极型器件，依靠一种多数载流子导电。
+    - <strong>三极管</strong>：双极型器件，依靠多数载流子和少数载流子导电。
+4. <strong>灵活性</strong>：
+    - <strong>MOS管</strong>：源极和漏极可以互换，栅压可正可负，灵活性更高。
+    - <strong>三极管</strong>：源极和漏极不可互换，栅压只能是正电压。
+5. <strong>集成能力</strong>：
+    - <strong>MOS管</strong>：能在很小电流和低电压下工作，易于在一个硅片上集成多个MOS管。
+    - <strong>三极管</strong>：集成度较低，通常不适合高集成电路应用。
+6. <strong>输入阻抗和噪声</strong>：
+    - <strong>MOS管</strong>：具有高输入阻抗和低噪声，适合高性能电子设备输入级。
+    - <strong>三极管</strong>：输入阻抗较低，噪声较高，性能不如MOS管。
+7. <strong>功耗损耗</strong>：
+    - <strong>MOS管</strong>：功耗损耗低。
+    - <strong>三极管</strong>：功耗损耗高。
+8. <strong>使用成本</strong>：
+    - <strong>MOS管</strong>：成本较高，但适用于高频、高速电路和大电流应用。
+    - <strong>三极管</strong>：成本较低，适用于成本敏感的应用场景。</p>
+<p>![[e1180f955523930735c1b8cd671992eb_MD5.jpg]]</p>
+<h4 id="mosibgt_1">MOS管与IBGT的差别</h4>
+<p>GBT（Insulated Gate Bipolar Transistor），绝缘栅双极型晶体管，是由BJT（双极型三极管）和MOS绝缘栅型场效应管组成的复合全控型电压驱动式功率半导体器件，兼有MOSFET的高输入阻抗和功率晶体管（GTR）的低导通压降两方面的优点。</p>
+<p>GTR饱和压降低，载流密度大，但驱动电流较大；MOSFET驱动功率很小，开关速度快，但导通压降大，载流密度小。IGBT综合了以上两种器件的优点，驱动功率小而饱和压降低。常见的IGBT又分为单管和模块两种，单管的外观和MOS管有点相像，常见生产厂家有富士电机、仙童半导体等，模块产品一般为内部封装了数个单个IGBT，由内部联接成适合的电路。</p>
+<p>由于IGBT原理为先开通MOS管，再驱动三极管开通，该原理决定了IGBT的开关速度比MOS管慢，但比三极管快。</p>
+<p>制造成本上，IGBT要比MOS管高很多，这是因为IGBT的制作多了薄片背面离子注入、薄片低温退火（如激光退火）工序，而这两个工序都需要专门针对薄片工艺的昂贵机台。</p>
+<p>在低压下，低压MOS管的导通压降通常都控制在0.5V以下（基本不会超过1V的），比如IR4110低压MOS管，其内阻为4mΩ，给它100A的导通电流，导通压降是0.4V左右。电流导通压降低，意味着导通损耗小，同时兼具开关损耗小的特性，因此，IGBT相对MOS管在电性能没有优势，加上在性价比上MOS管更具优势，所以基本上看不到低压IGBT。</p>
+<p>MOS管的最大劣势是随着耐压升高，内阻迅速增大，所以高压下内阻很大，致使MOS管不能做大功率应用。</p>
+<p>在高压领域，MOS管的开关速度仍是最快的，但高压下MOS管的导通压降很大（内阻随耐压升高而迅速升高），即便是耐压600V的COOLMOS管，导通电阻可高达几欧姆，致使耐流很小。</p>
+<p>而IGBT在高耐压下，导通压降几乎没明显增大（IGBT的导通电流通过三极管处理），所以高压下IGBT优势明显，既有高开关速度，又有三极管的大电流特性；另外，在新一代IGBT产品中，开关速度高（纳秒级），导通压降、开关损耗等也有了长足进步，使得IGBT耐脉冲电流冲击力更强，且耐压高、驱动功率小等优点更加突出。</p>
+<p>在需要耐压超过150V的使用条件下，MOS管已经基本没有优势。以典型的IRFS4115与第四代IGBT型SKW30N60对比中，在150V、20A连续工况下运行，前者开关损耗为6mJ/pulse，而后者只有1.15mJ/pulse，不足前者的&#8533;；若用极限工作条件，二者功率负荷相差将更悬殊！</p>
+<p>目前，诸如冶金、钢铁、高速铁路、船舶等有大功率需求的领域已较少见到MOS管，而是广泛应用IGBT元器件。</p>
+<p>总的来说，IGBT更适用于高压、大电流、低频率（20KHZ左右）场所，电压越高，IGBT越有优势，在600v以上，IGBT的优势非常明显；而MOSFET更适用于低电压、小电流、低频率（几十KHz~几MHz）领域，电压越低，MOS管越有优势。</p>
+<p>MOS管与IGBT的主要差异
+1. <strong>基本结构</strong>：
+    - <strong>MOS管（MOSFET）</strong>：是一种场效应管，仅依赖于MOS结构。
+    - <strong>IGBT</strong>：结合了MOSFET和BJT的特点，具有MOSFET的高输入阻抗和BJT的低导通压降。
+2. <strong>开关速度</strong>：
+    - <strong>MOS管</strong>：具有较高的开关速度，因为不需要恢复时间。
+    - <strong>IGBT</strong>：开关速度比MOS管慢，但比BJT快。这是因为IGBT的开关过程涉及先开通MOS管，然后驱动BJT。
+3. <strong>控制方式</strong>：
+    - <strong>MOS管</strong>：电压控制元件，适合低电流应用。
+    - <strong>IGBT</strong>：综合了MOSFET的电压控制和BJT的电流控制，适合高电流应用。
+4. <strong>导通压降</strong>：
+    - <strong>MOS管</strong>：在低压下导通压降小，通常控制在0.5V以下。
+    - <strong>IGBT</strong>：在高压下，导通压降相对较小，适合高压应用。
+5. <strong>功耗</strong>：
+    - <strong>MOS管</strong>：在低压条件下具有较小的开关和导通损耗，但在高压下内阻迅速增大，功耗增加。
+    - <strong>IGBT</strong>：具有较低的导通压降和功耗，特别是在高压条件下表现优秀。
+6. <strong>应用领域</strong>：
+    - <strong>MOS管</strong>：适用于低压、小电流和高频率（几十kHz至几MHz）应用，如开关电源和低功率电路。
+    - <strong>IGBT</strong>：适用于高压、大电流和低频率（约20kHz）的应用，如工业电源、变频器和电动车驱动。
+7. <strong>制造成本</strong>：
+    - <strong>MOS管</strong>：制造成本较低。
+    - <strong>IGBT</strong>：制造成本较高，因其制造过程复杂，包括离子注入和薄片退火等步骤。
+8. <strong>性能对比</strong>：
+    - <strong>MOS管</strong>：在低电压应用中表现良好，但在高压情况下，导通电阻和功耗较大。
+    - <strong>IGBT</strong>：在高压、大电流应用中表现优越，具有较低的导通压降和开关损耗。</p>
+<h2 id="mos_6">MOS管主要参数</h2>
+<p>场效应管的参数很多，包括极限参数、动态电特性参数和静态电特性参数，其中重要的参数有：<strong>饱和漏源电流IDSS</strong>、<strong>夹断电压Up</strong>、<strong>开启电压VT</strong>（加强型绝缘栅管）、<strong>跨导gM</strong>、<strong>漏源击穿电压BVDS</strong>、**最大耗散功率PDSM**和**最大漏源电流IDSM**等。</p>
+<h3 id="_5">最大额定参数</h3>
+<p>最大额定参数，要求所有数值取得条件为Ta=25℃。</p>
+<p><img alt="" src="../_resources/%E5%9F%BA%E6%9C%AC%E5%85%83%E5%99%A8%E4%BB%B6-05-%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1/%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1-13.jpg" /></p>
+<h4 id="vdsvdss">VDS/VDSS 最大漏源电压</h4>
+<p>在栅源短接，漏源额定电压VDSS[或写作V(BR)DSS]是指漏-源未发生雪崩击穿前所能施加的最大电压。根据温度的不同，实际雪崩击穿电压可能低于额定VDSS。</p>
+<h4 id="vgs-vgss">VGS/ VGSS 最大栅源电压</h4>
+<p>VGS[或写作V(BR)GSS]额定电压是栅源两极间可以施加的最大电压。设定该额定电压的主要目的是防止电压过高导致的栅氧化层损伤。实际栅氧化层可承受的电压远高于额定电压，但是会随制造工艺的不同而改变，因此保持VGS在额定电压以内可以保证应用的可靠性。</p>
+<h4 id="id">ID 连续漏电流</h4>
+<p>ID定义为芯片在最大额定结温TJ(max)下，管表面温度在25℃或者更高温度下，可允许的最大连续直流电流。该参数为结与管壳之间额定热阻RθJC和管壳温度的函数：</p>
+<p><img alt="" src="../_resources/%E5%9F%BA%E6%9C%AC%E5%85%83%E5%99%A8%E4%BB%B6-05-%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1/%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1-14.jpg" /></p>
+<p>ID中并不包含开关损耗，并且实际使用时保持管表面温度在25℃（Tcase）也很难。因此，硬开关应用中实际开关电流通常小于ID 额定值@ TC=25℃的一半，通常在&#8531;～&frac14;。</p>
+<p>注：采用热阻JA可以估算出特定温度下的ID，这个值更有现实意义。</p>
+<h4 id="idmidsm">IDM/IDSM 脉冲漏极电流/最大漏源电流</h4>
+<p>该参数反映了器件可以处理的脉冲电流的高低，脉冲电流要远高于连续的直流电流。定义IDM的目的在于：线的欧姆区。对于一定的栅-源电压，MOSFET导通后，存在最大的漏极电流，如图表15所示，对于给定的一个栅-源电压，如果工作点位于线性区域内，漏极电流的增大会提高漏-源电压，由此增大导通损耗。长时间工作在大功率之下，将导致器件失效。因此，在典型栅极驱动电压下，需要将额定IDM设定在区域之下，区域的分界点在VGS和曲线相交点。</p>
+<p><img alt="" src="../_resources/%E5%9F%BA%E6%9C%AC%E5%85%83%E5%99%A8%E4%BB%B6-05-%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1/%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1-15.jpg" /></p>
+<p>因此需要设定电流密度上限，防止芯片温度过高而烧毁。这本质上是为了防止过高电流流经封装引线，因为在某些情况下，整个芯片上最“薄弱的连接”不是芯片，而是封装引线。</p>
+<p>考虑到热效应对于IDM的限制，温度的升高依赖于脉冲宽度，脉冲间的时间间隔，散热状况，RDS(on)以及脉冲电流的波形和幅度。单纯满足脉冲电流不超出IDM上限并不能保证结温不超过最大允许值。可以参考热性能与机械性能中关于瞬时热阻的讨论，来估计脉冲电流下结温的情况。</p>
+<h4 id="pdsm">PDSM 最大耗散功率</h4>
+<p>亦即容许沟道总功耗，标定了器件可以消散的最大功耗，可以表示为最大结温和管壳温度为25℃时热阻的函数。</p>
+<h4 id="tjtstg">TJ、TSTG 工作温度和存储环境温度的范围</h4>
+<p>这两个参数标定了器件工作和存储环境所允许的结温区间。设定这样的温度范围是为了满足器件最短工作寿命的要求。如果确保器件工作在这个温度区间内，将极大地延长其工作寿命。</p>
+<h4 id="eas">EAS 单脉冲雪崩击穿能量</h4>
+<p>如果电压过冲值(通常由于漏电流和杂散电感造成)未超过击穿电压，则器件不会发生雪崩击穿，因此也就不需要消散雪崩击穿的能力。雪崩击穿能量标定了器件可以容忍的瞬时过冲电压的安全值，其依赖于雪崩击穿需要消散的能量。</p>
+<p>定义额定雪崩击穿能量的器件通常也会定义额定EAS。额定雪崩击穿能量与额定UIS具有相似的意义。EAS标定了器件可以安全吸收反向雪崩击穿能量的高低。</p>
+<p>L是电感值，ID为电感上流过的电流峰值，其会突然转换为测量器件的漏极电流。电感上产生的电压超过MOSFET击穿电压后，将导致雪崩击穿。雪崩击穿发生时，即使MOSFET处于关断状态，电感上的电流同样会流过MOSFET器件。电感上所储存的能量与杂散电感上存储，由MOSFET消散的能量类似。</p>
+<p>MOSFET并联后，不同器件之间的击穿电压很难完全相同。通常情况是：某个器件率先发生雪崩击穿，随后所有的雪崩击穿电流(能量)都从该器件流过。</p>
+<h4 id="ear">EAR 重复雪崩能量</h4>
+<p>重复雪崩能量已经成为“工业标准”，但是在没有设定频率、其它损耗以及冷却量的情况下，该参数没有任何意义。散热(冷却)状况经常制约着重复雪崩能量。对于雪崩击穿所产生的能量高低也很难预测。</p>
+<p>额定EAR的真实意义在于标定了器件所能承受的反复雪崩击穿能量。该定义的前提条件是：不对频率做任何限制，从而器件不会过热，这对于任何可能发生雪崩击穿的器件都是现实的。在验证器件设计的过程中，最好可以测量处于工作状态的器件或者热沉的温度，来观察MOSFET器件是否存在过热情况，特别是对于可能发生雪崩击穿的器件。</p>
+<h4 id="iar">IAR 雪崩击穿电流</h4>
+<p>对于某些器件，雪崩击穿过程中芯片上电流集边的倾向要求对雪崩电流IAR进行限制。这样，雪崩电流变成雪崩击穿能量规格的“精细阐述”；其揭示了器件真正的能力。</p>
+<p><img alt="" src="../_resources/%E5%9F%BA%E6%9C%AC%E5%85%83%E5%99%A8%E4%BB%B6-05-%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1/%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1-16.jpg" /></p>
+<h4 id="soa">SOA 安全工作区</h4>
+<p>每种MOS管都会给出其安全工作区域，功率MOS管不会表现出二次击穿，因此安全运行区域只简单从导致结温达到最大允许值时的耗散功率定义。</p>
+<h3 id="_6">静态电特性</h3>
+<p><img alt="" src="../_resources/%E5%9F%BA%E6%9C%AC%E5%85%83%E5%99%A8%E4%BB%B6-05-%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1/%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1-17.jpg" /></p>
+<h4 id="vbrdssvbdss">V(BR)DSS/VBDSS 漏源击穿电压(破坏电压)</h4>
+<p>或叫BVDS，是指在特定的温度和栅源短接情况下，流过漏极电流达到一个特定值时的漏源电压。这种情况下的漏源电压为雪崩击穿电压。</p>
+<p>V(BR)DSS是正温度系数，其漏源电压的最大额定值随着温度的下降而降低，在-50℃时，V(BR)DSS大约是25℃时最大漏源额定电压的90%。</p>
+<h4 id="bvgs">BVGS 栅源击穿电压</h4>
+<p>在增加栅源电压过程中，使栅极电流IG由零开端剧增时的VGS。</p>
+<h4 id="vgsth">VGS(th)阈值电压</h4>
+<p>也用VT表示，是指加的栅源电压能使漏极开始有电流，或关断MOSFET时电流消失时的电压，测试的条件（漏极电流、漏源电压、结温）也是有规格的。正常情况下，所有的MOS栅极器件的阈值电压都会有所不同。因此，VGS(th)的变化范围是规定好的。VGS(th)是负温度系数，当温度上升时，MOSFET将会在比较低的栅源电压下开启。</p>
+<h4 id="vgsoff">VGS(off) 夹断电压</h4>
+<p>也用Up表示，是指结型或耗尽型绝缘栅场效应管中，使漏源间刚截止时的栅极电压。</p>
+<h4 id="rdson">RDS(on) 导通电阻</h4>
+<p>是指在特定的漏电流（通常为ID电流的一半）、栅源电压和25℃的情况下测得的漏-源电阻。</p>
+<h4 id="rgs">RGS 栅源电阻</h4>
+<p>即在栅、源极之间加的电压与栅极电流之比，这一特性有时以流过栅极的栅流表示MOS管的RGS能够很容易地超越1010Ω。</p>
+<h4 id="idss">IDSS 零栅压漏极电流</h4>
+<p>也称为饱和漏源电流，是指在当栅源电压VGS＝0时，在特定的漏源电压下的漏源之间泄漏电流。既然泄漏电流随着温度的增加而增大，IDSS在室温和高温下都有规定。漏电流造成的功耗可以用IDSS乘以漏源之间的电压计算，通常这部分功耗可以忽略不计。</p>
+<h4 id="igss">IGSS 栅源漏电流</h4>
+<p>是指在特定的栅源电压情况下流过栅极的漏电流</p>
+<h3 id="_7">动态电特性</h3>
+<p><img alt="" src="../_resources/%E5%9F%BA%E6%9C%AC%E5%85%83%E5%99%A8%E4%BB%B6-05-%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1/%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1-18.jpg" /></p>
+<h4 id="ciss">Ciss 输入电容</h4>
+<p>将漏源短接，用交流信号测得的栅极和源极之间的电容就是输入电容。Ciss是由栅漏电容Cgd和栅源电容Cgs并联而成，或者Ciss=Cgs+Cgd。当输入电容充电致阈值电压时器件才能开启，放电致一定值时器件才可以关断。因此驱动电路和Ciss对器件的开启和关断延时有着直接的影响。</p>
+<h4 id="coss">Coss 输出电容</h4>
+<p>将栅源短接，用交流信号测得的漏极和源极之间的电容就是输出电容。Coss是由漏源电容Cds和栅漏电容Cgd并联而成，或者Coss=Cds+Cgd，对于软开关的应用，Coss非常重要，因为它可能引起电路的谐振</p>
+<h4 id="crss">Crss 反向传输电容</h4>
+<p>在源极接地的情况下，测得的漏极和栅极之间的电容为反向传输电容。反向传输电容等同于栅漏电容。Cres=Cgd，反向传输电容也常叫做米勒电容，对于开关的上升和下降时间来说是其中一个重要的参数，他还影响这关断延时时间。电容随着漏源电压的增加而减小，尤其是输出电容和反向传输电容。</p>
+<h4 id="eoss">Eoss 输出电容存储能量</h4>
+<p>表示输出电容Coss在MOS管存储的能量大小。由于MOS管的输出电容Coss有非常明显的非线性特性，随VDS电压的变化而变化。所以如果Datasheet提供了这个参数，对于评估MOS管的开关损耗很有帮助。并非所有的MOS管手册中都会提供这个参数，事实上大部分Datasheet并不提供。</p>
+<h4 id="didt">di/dt 电流上升率</h4>
+<p>该参数反应了MOSFET体二极管的反向恢复特性。因为二极管是双极型器件，受到电荷存储的影响，当二极管反向偏置时，PN结储存的电荷必须清除，上述参数正反映了这一特性。</p>
+<p><img alt="" src="../_resources/%E5%9F%BA%E6%9C%AC%E5%85%83%E5%99%A8%E4%BB%B6-05-%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1/%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1-19.jpg" /></p>
+<h4 id="qgsqgdqg">Qgs、Qgd和Qg（栅极电荷值）</h4>
+<p>Qg栅极电荷值，也叫栅极总充电电量，反应存储在端子间电容上的电荷，既然开关的瞬间，电容上的电荷随电压的变化而变化，所以设计栅驱动电路时经常要考虑栅电荷的影响。</p>
+<p>Qgs为从0电荷开始到第一个拐点处，Qgd是从第一个拐点到第二个拐点之间部分（也叫做“米勒”电荷），Qg是从0点到VGS等于一个特定的驱动电压的部分。</p>
+<p><img alt="" src="../_resources/%E5%9F%BA%E6%9C%AC%E5%85%83%E5%99%A8%E4%BB%B6-05-%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1/%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1-20.jpg" /></p>
+<p>漏电流和漏源电压的变化对栅电荷值影响比较小，而且栅电荷不随温度的变化。测试条件是规定好的。栅电荷的曲线图体现在数据表中，包括固定漏电流和变化漏源电压情况下所对应的栅电荷变化曲线。在上图中，平台电压VGS(pl)随着电流的增大增加的比较小（随着电流的降低也会降低）。平台电压也正比于阈值电压，所以不同的阈值电压将会产生不同的平台电压。详解见下图：</p>
+<p><img alt="" src="../_resources/%E5%9F%BA%E6%9C%AC%E5%85%83%E5%99%A8%E4%BB%B6-05-%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1/%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1-21.jpg" /></p>
+<h4 id="tdon">td(on) 导通延时时间</h4>
+<p>是从当栅源电压上升到10%栅驱动电压时到漏电流升到规定电流的90%时所经历的时间。</p>
+<h4 id="tdoff">td(off) 关断延时时间</h4>
+<p>是从当栅源电压下降到90%栅驱动电压时到漏电流降至规定电流的10%时所经历的时间。这显示电流传输到负载之前所经历的延迟。</p>
+<h4 id="tr">Tr 上升时间</h4>
+<p>上升时间是漏极电流从10%上升到90%所经历的时间。</p>
+<h4 id="tf">Tf 下降时间</h4>
+<p>下降时间是漏极电流从90%下降到10%所经历的时间。</p>
+<h4 id="nf">NF 低频噪声系数</h4>
+<p>单位为分贝（dB），噪声是由管子内部载流子运动的不规则性所引起的，由于它的存在，可使放大器即便在没有信号输人时，输出端也会出现不规则的电压或电流变化。噪声系数NF数值越小，代表管子所产生的噪声越小，场效应管的噪声系数约为几个分贝，比双极性三极管的要小。</p>
+<h4 id="gm">gM 跨导</h4>
+<p>是表示栅源电压VGS对漏极电流ID的控制能力，即漏极电流ID变化量与栅源电压VGS变化量的比值，是权衡场效应管放大才能的重要参数。</p>
+<h3 id="_8">其他重要参数</h3>
+<p>除以上介绍的参数之外，MOS管还有很多重要的参数，明细如下：</p>
+<p><img alt="" src="../_resources/%E5%9F%BA%E6%9C%AC%E5%85%83%E5%99%A8%E4%BB%B6-05-%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1/%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1-22.jpg" /></p>
+<h2 id="mos_7">MOS 管判断</h2>
+<h3 id="_9">三个极怎么判定</h3>
+<p><img alt="" src="../_resources/%E5%9F%BA%E6%9C%AC%E5%85%83%E5%99%A8%E4%BB%B6-05-%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1/%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1-23.jpg" /></p>
+<h3 id="n-p">是 N 沟道还是 P 沟道</h3>
+<h4 id="n_2">N 沟道</h4>
+<p><img alt="" src="../_resources/%E5%9F%BA%E6%9C%AC%E5%85%83%E5%99%A8%E4%BB%B6-05-%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1/%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1-24.jpg" /></p>
+<h4 id="p_2">P 沟道</h4>
+<p><img alt="" src="../_resources/%E5%9F%BA%E6%9C%AC%E5%85%83%E5%99%A8%E4%BB%B6-05-%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1/%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1-25.jpg" /></p>
+<h3 id="_10">寄生二极管的方向如何判定</h3>
+<p><img alt="" src="../_resources/%E5%9F%BA%E6%9C%AC%E5%85%83%E5%99%A8%E4%BB%B6-05-%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1/%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1-26.jpg" /></p>
+<p><img alt="" src="../_resources/%E5%9F%BA%E6%9C%AC%E5%85%83%E5%99%A8%E4%BB%B6-05-%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1/%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1-27.jpg" /></p>
+<h3 id="mos_8">MOS 管用作开关时在电路中的连接方法</h3>
+<p><img alt="" src="../_resources/%E5%9F%BA%E6%9C%AC%E5%85%83%E5%99%A8%E4%BB%B6-05-%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1/%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1-28.jpg" /></p>
+<p><img alt="" src="../_resources/%E5%9F%BA%E6%9C%AC%E5%85%83%E5%99%A8%E4%BB%B6-05-%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1/%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1-29.jpg" /></p>
+<h3 id="_11">应用</h3>
+<p><img alt="" src="../_resources/%E5%9F%BA%E6%9C%AC%E5%85%83%E5%99%A8%E4%BB%B6-05-%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1/%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1-30.jpg" /></p>
+<p><img alt="" src="../_resources/%E5%9F%BA%E6%9C%AC%E5%85%83%E5%99%A8%E4%BB%B6-05-%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1/%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1-31.jpg" /></p>
+<p><img alt="" src="../_resources/%E5%9F%BA%E6%9C%AC%E5%85%83%E5%99%A8%E4%BB%B6-05-%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1/%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1-32.jpg" /></p>
+<h3 id="_12">使用场景</h3>
+<p>一般主板上使用最多的是**增强型MOS管**</p>
+<p><strong>NMOS最多, 一般多用在信号控制上</strong></p>
+<p>其次是**PMOS, 多用在电源开关等方面**</p>
+<p><strong>耗尽型几乎不用</strong></p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 - 2028 Martin Donath
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["announce.dismiss", "content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy", "content.tooltips", "navigation.expand", "navigation.indexes", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.path", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
