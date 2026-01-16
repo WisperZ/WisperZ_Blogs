@@ -1,0 +1,37 @@
+[project]
+site_name = "My Site"
+site_url = "https://example.com"
+
+[project.theme]
+variant = "modern"  # 或 "classic"
+language = "zh"
+features = [
+    "navigation.tabs",
+    "navigation.sections",
+    "search.suggest",
+]
+
+[[project.theme.palette]]
+scheme = "default"
+primary = "indigo"
+accent = "indigo"
+
+[project.plugins.search]
+separator = '[\s\u200b\-]'
+
+
+[project.plugins.blog]
+post_date_format = "full"
+draft = true
+post_readtime = true
+post_readtime_words_per_minute = 265
+
+nav = [
+    { "Home" = "index.md" },
+    { "About" = "about.md" },
+]
+
+[project.markdown_extensions]
+abbr = {}
+attr_list = {}
+admonition = {}
