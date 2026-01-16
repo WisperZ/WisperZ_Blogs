@@ -27,14 +27,40 @@ markdown_extensions: #Markdown拓展,添加之后可以支持更多的Markdown�
 
 theme:
   name: "material" #使用Mkdocs-Material主题#
-    
+  features: # 功能  
+    - announce.dismiss # 可以叉掉公告的功能
+    - content.action.edit # 编辑按钮，似乎没啥用
+    - content.action.view # 查看按钮，似乎没啥用
+    - content.code.annotate # 代码注释，具体不清楚
+    - content.code.copy # 复制代码按钮
+    # - content.code.select # 选择代码按钮
+    # - content.tabs.link # 链接标签
+    - content.tooltips # 不太清楚呢这个
+    # - header.autohide # 自动隐藏header
+    - navigation.expand # 默认展开导航栏
+    - navigation.footer # 底部导航栏
+    - navigation.indexes # 索引按钮可以直接触发文件，而不是只能点击其下属选项浏览，这个功能可以给对应的section提供很好的预览和导航功能
+    # - navigation.instant # 瞬间加载 - 如果这个开着，那么语言切换后就会跳转至首页，所以我关掉了
+    - navigation.instant.prefetch # 预加载
+    - navigation.instant.progress # 进度条
+    - navigation.path # 导航路径， 目前好像没啥用
+    # - navigation.prune # 只构建可见的页面
+    - navigation.sections # 导航栏的section
+    - navigation.tabs # 顶级索引被作为tab
+    - navigation.tabs.sticky # tab始终可见
+    - navigation.top # 开启顶部导航栏
+    - navigation.tracking # 导航栏跟踪
+    - search.highlight # 搜索高亮
+    - search.share # 搜索分享
+    - search.suggest # 搜索建议
+    - toc.follow # 目录跟踪-页面右侧的小目录
   palette:
     - media: "(prefers-color-scheme: light)"   # 浅色模式
       scheme: default
       primary: black        # 主色，标题、文字
       accent: teal          # 强调色，按钮、链接等
       toggle:
-        icon: material/weather-sunny
+        icon: material/toggle-switch
         name: 切换到夜间模式
 
     - media: "(prefers-color-scheme: dark)"    # 深色模式
@@ -42,6 +68,18 @@ theme:
       primary: teal         # 夜间主色
       accent: cyan          # 夜间强调色，细节按钮、链接
       toggle:
-        icon: material/weather-night
+        icon: material/toggle-switch-off
         name: 切换到日间模式
+  font: # 字体，大概率不需要换
+    text: Roboto
+    code: Roboto Mono
+  # favicon: assets/favicon.png # 网站图标 似乎不需要管
+  icon: # 一些用到的icon
+    logo: logo
+    previous: fontawesome/solid/angle-left
+    next: fontawesome/solid/angle-right
+    tag:
+      default-tag: fontawesome/solid/tag
+      hardware-tag: fontawesome/solid/microchip
+      software-tag: fontawesome/solid/laptop-code
   language: zh
