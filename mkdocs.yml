@@ -38,7 +38,7 @@ theme:
     - content.tooltips # 不太清楚呢这个
     # - header.autohide # 自动隐藏header
     - navigation.expand # 默认展开导航栏
-    - navigation.footer # 底部导航栏
+    # - navigation.footer # 底部导航栏
     - navigation.indexes # 索引按钮可以直接触发文件，而不是只能点击其下属选项浏览，这个功能可以给对应的section提供很好的预览和导航功能
     # - navigation.instant # 瞬间加载 - 如果这个开着，那么语言切换后就会跳转至首页，所以我关掉了
     - navigation.instant.prefetch # 预加载
@@ -57,16 +57,16 @@ theme:
   palette:
     - media: "(prefers-color-scheme: light)"   # 浅色模式
       scheme: default
-      primary: black        # 主色，标题、文字
-      accent: teal          # 强调色，按钮、链接等
+      primary: grey        # 主色，标题、文字
+      accent: grey          # 强调色，按钮、链接等
       toggle:
         icon: material/toggle-switch
         name: 切换到夜间模式
 
     - media: "(prefers-color-scheme: dark)"    # 深色模式
       scheme: slate
-      primary: teal         # 夜间主色
-      accent: cyan          # 夜间强调色，细节按钮、链接
+      primary: black         # 夜间主色
+      accent: black          # 夜间强调色，细节按钮、链接
       toggle:
         icon: material/toggle-switch-off
         name: 切换到日间模式
@@ -83,3 +83,5 @@ theme:
       hardware-tag: fontawesome/solid/microchip
       software-tag: fontawesome/solid/laptop-code
   language: zh
+extra_css:
+  # - css/extra.css
