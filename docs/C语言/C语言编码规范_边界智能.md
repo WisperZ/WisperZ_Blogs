@@ -312,14 +312,14 @@ typedef enum {
 > **示例:**
 
 ```c
-/* 正确 */
-#define MIN(x, y)       ((x) < (y) ? (x) : (y))
-#define SUM(x, y)       ((x) + (y))
-#define PI_ROUNDED      3.14
+    /* 正确 */
+    #define MIN(x, y)       ((x) < (y) ? (x) : (y))
+    #define SUM(x, y)       ((x) + (y))
+    #define PI_ROUNDED      3.14
 
-/* 错误 */
-#define MIN(x, y)       x < y ? x : y
-#define SUM(x, y)       (x) + (y)
+    /* 错误 */
+    #define MIN(x, y)       x < y ? x : y
+    #define SUM(x, y)       (x) + (y)
 ```
 #### 5.2 规则 宏定义
 

@@ -139,8 +139,8 @@ ptr_to_char a;
 `注意`:你应该使用typedef而不是#define来创建新的类型名，因为后者无法正确地处理指针类型。
 例如:
 ```c
-#define　d_ptr_to_char　 char *
-d_ptr_to_char　 a, b;
+    #define　d_ptr_to_char　 char *
+    d_ptr_to_char　 a, b;
 ```
 在这个语句中,#define展开之后变成了
 ```c
