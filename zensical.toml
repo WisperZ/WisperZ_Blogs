@@ -1,30 +1,42 @@
 [project]
 site_name = "WisperZ's Blog"
-site_url = "https://example.com"
+site_url = "https://wisperz.github.io/WisperZ_Blogs"
 
+# =========================================================
+# 主题配置
+# =========================================================
 [project.theme]
-variant = "modern"  # 或 "classic"
+variant = "modern"
 language = "zh"
+
 features = [
-    "navigation.instant",           # 即时导航
-    "navigation.instant.prefetch",  # 预加载
-    "navigation.tracking",          # 锚点跟踪
-    "navigation.tabs",              # 导航标签
-    "navigation.sections",          # 导航部分
-    "navigation.expand",            # 展开导航
-    "navigation.top",               # 返回顶部按钮
-    "navigation.footer",            # 页脚导航
-    "search.suggest",               # 搜索建议
-    "search.highlight",             # 搜索高亮
-    "search.share",                 # 搜索分享
-    "content.tooltips",             # 内容提示框
-    "content.code.copy",            # 代码复制按钮
-    "content.code.select",          # 代码选择功能
-    "content.code.annotate",        # 代码注释功能
+    # 导航
+    "navigation.instant",
+    "navigation.instant.prefetch",
+    "navigation.tracking",
+    "navigation.tabs",
+    "navigation.sections",
+    "navigation.expand",
+    "navigation.top",
+    "navigation.footer",
+
+    # 搜索
+    "search.suggest",
+    "search.highlight",
+    "search.share",
+
+    # 内容增强
+    "content.tooltips",
+    "content.code.copy",
+    "content.code.select",
+    "content.code.annotate",
 ]
 
+# -------------------------
+# 主题配色
+# -------------------------
 
-# 自动模式（跟随系统）
+# 跟随系统
 [[project.theme.palette]]
 media = "(prefers-color-scheme)"
 toggle = { icon = "material/link", name = "关闭自动模式" }
@@ -32,22 +44,24 @@ toggle = { icon = "material/link", name = "关闭自动模式" }
 # 日间模式
 [[project.theme.palette]]
 media = "(prefers-color-scheme: light)"
-scheme = "default"                # 日间模式配色
-primary = "indigo"                # 主色调
-accent = "indigo"                 # 强调色
+scheme = "default"
+primary = "indigo"
+accent = "indigo"
 toggle = { icon = "material/toggle-switch", name = "切换至夜间模式" }
 
 # 夜间模式
 [[project.theme.palette]]
 media = "(prefers-color-scheme: dark)"
-scheme = "slate"                  # 夜间模式配色
-primary = "indigo"                # 主色调
-accent = "indigo"                 # 强调色
+scheme = "slate"
+primary = "indigo"
+accent = "indigo"
 toggle = { icon = "material/toggle-switch-off-outline", name = "切换至日间模式" }
 
+# =========================================================
+# 插件
+# =========================================================
 [project.plugins.search]
-separator = '[\s\u200b\-]'
-
+separator = "[\\s\\u200b\\-]"
 
 [project.plugins.blog]
 post_date_format = "full"
@@ -56,12 +70,51 @@ post_readtime = true
 post_readtime_words_per_minute = 265
 
 nav = [
-    { "Home" = "index.md" },
+    { "Home"  = "index.md" },
     { "About" = "about.md" },
 ]
 
+# =========================================================
+# Markdown 扩展（关键：修复你当前的格式问题）
+# =========================================================
 [project.markdown_extensions]
+
+# ---- Python-Markdown 核心扩展 ----
 abbr = {}
 attr_list = {}
 admonition = {}
+
+fenced_code = {}
+tables = {}
+footnotes = {}
+
+# 目录与标题锚点（解决 #_2 这种问题）
+toc = { permalink = true }
+
+# ---- pymdown-extensions（强烈建议） ----
+
+[pymdownx.highlight]
+linenums = false
+guess_lang = true
+
+[pymdownx.superfences]
+# 让代码块、嵌套块稳定解析
+
+[pymdownx.inlinehilite]
+# 支持 `==` 内联代码高亮
+
+[pymdownx.details]
+# 折叠块（???）
+
+[pymdownx.tilde]
+# ~~删除线~~
+
+[pymdownx.caret]
+# ^^上标^^
+
+[pymdownx.mark]
+# ==高亮==
+
+[pymdownx.keys]
+# ++ctrl+c++
 
