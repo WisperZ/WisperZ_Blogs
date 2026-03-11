@@ -36,40 +36,48 @@ tio --version
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 chcp 65001 | Out-Null
 
-# 1. 显示串口设备列表
+# 1. 显示设备
 Write-Host "--- Available Serial Devices ---" -ForegroundColor Cyan
 tio --list
 
-# 2. 获取用户输入
+# 2. 交互输入
 Write-Host ""
-Write-Host "TIP: If you see '/dev/ttyS22', it usually maps to COM23 (n+1)." -ForegroundColor Gray
-$inputStr = (Read-Host "Enter COM number (e.g. 3) or full path (e.g. /dev/ttyS22)").Trim()
+$p = (Read-Host "1. Port (e.g. 23 or /dev/ttyS23) [/dev/ttyS23]").Trim()
+if (!$p) { $p = "/dev/ttyS23" }
 
-# 3. 处理输入
-if ($inputStr -match '^\d+$') {
-    $port = "COM$inputStr"
-} elseif (-not $inputStr) {
-    $port = "COM3"
-} else {
-    $port = $inputStr
+$b = (Read-Host "2. Baud [115200]").Trim()
+if (!$b) { $b = "115200" }
+
+$f = (Read-Host "3. Flow (none/hard) [none]").Trim()
+if (!$f) { $f = "none" }
+
+# 3. 智能路径处理
+# 如果输入的是数字 23，自动转为 /dev/ttyS23；如果是完整路径则直接使用
+if ($p -match '^\d+$') { 
+    $port = "/dev/ttyS$p" 
+} else { 
+    $port = $p 
 }
 
-# 4. 日志目录
-$logDir = "D:\\log"
-if (!(Test-Path $logDir)) {
-    New-Item -ItemType Directory -Path $logDir -Force
-}
-
-# 清理文件名非法字符
+# 4. 日志设置
+$logDir = "D:\log"
+if (!(Test-Path $logDir)) { New-Item -ItemType Directory -Path $logDir -Force }
 $cleanName = $port -replace '[\\/]', '_'
-$fn = Join-Path $logDir "${cleanName}_$(Get-Date -f 'yyyyMMdd_HHmm').log"
+$fn = Join-Path $logDir "${cleanName}_${b}_$(Get-Date -f 'MMdd_HHmm').log"
 
-# 5. 启动 tio
-Write-Host "`n>> Target: $port" -ForegroundColor Green
-Write-Host ">> Log   : $fn" -ForegroundColor Yellow
-Write-Host ">> Press Ctrl+t then q to quit.`n" -ForegroundColor DarkGray
+# 5. 启动连接
+Write-Host "`n>> Connecting to $port ($b)..." -ForegroundColor Green
+Write-Host ">> Log: $fn" -ForegroundColor Yellow
 
-tio -t --timestamp-format iso8601 -L --log-file $fn $port
+# 注意：删除了旧版本不支持的 -R 参数
+# 如果还是报错，尝试把 --timestamp-format 简写为 -t
+tio -b $b -f $f -t --timestamp-format iso8601 -L --log-file $fn $port
+
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "`n[ERROR] tio exited with code $LASTEXITCODE." -ForegroundColor Red
+    Write-Host "Tip: Check if the device path is correct or try a different Baud rate."
+    Pause
+}
 ```
 
 ---
