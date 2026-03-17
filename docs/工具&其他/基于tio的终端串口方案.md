@@ -36,14 +36,31 @@ tio --version
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 chcp 65001 | Out-Null
 
-# 1. 显示设备
+# 1. 获取设备列表
 Write-Host "--- Available Serial Devices ---" -ForegroundColor Cyan
-tio --list
+$deviceList = tio --list
+$deviceList
+
+# 提取第一个串口（兼容 /dev/ttySxx /dev/ttyUSBxx /dev/ttyACMxx）
+$defaultPort = $null
+foreach ($line in $deviceList) {
+    if ($line -match '(/dev/tty\S+)') {
+        $defaultPort = $matches[1]
+        break
+    }
+}
+
+# 如果没解析到，兜底
+if (!$defaultPort) {
+    $defaultPort = "/dev/ttyS1"
+}
+
+Write-Host "`n[Auto] Default port: $defaultPort" -ForegroundColor Yellow
 
 # 2. 交互输入
 Write-Host ""
-$p = (Read-Host "1. Port (e.g. 23 or /dev/ttyS23) [/dev/ttyS23]").Trim()
-if (!$p) { $p = "/dev/ttyS23" }
+$p = (Read-Host "1. Port [$defaultPort]").Trim()
+if (!$p) { $p = $defaultPort }
 
 $b = (Read-Host "2. Baud [115200]").Trim()
 if (!$b) { $b = "115200" }
@@ -52,7 +69,6 @@ $f = (Read-Host "3. Flow (none/hard) [none]").Trim()
 if (!$f) { $f = "none" }
 
 # 3. 智能路径处理
-# 如果输入的是数字 23，自动转为 /dev/ttyS23；如果是完整路径则直接使用
 if ($p -match '^\d+$') { 
     $port = "/dev/ttyS$p" 
 } else { 
@@ -69,8 +85,6 @@ $fn = Join-Path $logDir "${cleanName}_${b}_$(Get-Date -f 'MMdd_HHmm').log"
 Write-Host "`n>> Connecting to $port ($b)..." -ForegroundColor Green
 Write-Host ">> Log: $fn" -ForegroundColor Yellow
 
-# 注意：删除了旧版本不支持的 -R 参数
-# 如果还是报错，尝试把 --timestamp-format 简写为 -t
 tio -b $b -f $f -t --timestamp-format iso8601 -L --log-file $fn $port
 
 if ($LASTEXITCODE -ne 0) {
