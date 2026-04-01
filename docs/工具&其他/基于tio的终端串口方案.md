@@ -39,36 +39,54 @@ chcp 65001 | Out-Null
 # 1. 获取设备列表
 Write-Host "--- Available Serial Devices ---" -ForegroundColor Cyan
 $deviceList = tio --list
-$deviceList
+$ports = @()
 
-# 提取第一个串口（兼容 /dev/ttySxx /dev/ttyUSBxx /dev/ttyACMxx）
-$defaultPort = $null
+# 直接沿用你原脚本的匹配逻辑，但改为存入数组并打印序号
 foreach ($line in $deviceList) {
     if ($line -match '(/dev/tty\S+)') {
-        $defaultPort = $matches[1]
-        break
+        $found = $matches[1]
+        if ($ports -notcontains $found) {
+            $ports += $found
+            Write-Host (" {0}. {1}" -f $ports.Count, $found)
+        }
     }
 }
 
-# 如果没解析到，兜底
-if (!$defaultPort) {
-    $defaultPort = "/dev/ttyS1"
+# 默认值处理：如果有设备，默认选1；没有则默认 /dev/ttyS1
+if ($ports.Count -gt 0) {
+    $defaultSelection = "1"
+    Write-Host "`n[Auto] Default selection: 1 ($($ports[0]))" -ForegroundColor Yellow
+} else {
+    $defaultSelection = "/dev/ttyS1"
+    Write-Host "`n[Auto] No devices found, default: $defaultSelection" -ForegroundColor Yellow
 }
-
-Write-Host "`n[Auto] Default port: $defaultPort" -ForegroundColor Yellow
 
 # 2. 交互输入
 Write-Host ""
-$p = (Read-Host "1. Port [$defaultPort]").Trim()
-if (!$p) { $p = $defaultPort }
+$input = (Read-Host "1. Select Port (Number or Path) [$defaultSelection]").Trim()
+if (!$input) { $input = $defaultSelection }
 
+# 3. 序号转路径逻辑
+# 如果输入的是数字，去数组里找对应的路径
+if ($input -match '^\d+$') {
+    $idx = [int]$input - 1
+    if ($idx -ge 0 -and $idx -lt $ports.Count) {
+        $p = $ports[$idx]
+    } else {
+        # 如果数字超标，保持你原来的兜底逻辑
+        $p = "/dev/ttyS$input"
+    }
+} else {
+    $p = $input
+}
+
+# 后面的逻辑完全保持你原版不动
 $b = (Read-Host "2. Baud [115200]").Trim()
 if (!$b) { $b = "115200" }
 
 $f = (Read-Host "3. Flow (none/hard) [none]").Trim()
 if (!$f) { $f = "none" }
 
-# 3. 智能路径处理
 if ($p -match '^\d+$') { 
     $port = "/dev/ttyS$p" 
 } else { 
@@ -89,7 +107,6 @@ tio -b $b -f $f -t --timestamp-format iso8601 -L --log-file $fn $port
 
 if ($LASTEXITCODE -ne 0) {
     Write-Host "`n[ERROR] tio exited with code $LASTEXITCODE." -ForegroundColor Red
-    Write-Host "Tip: Check if the device path is correct or try a different Baud rate."
     Pause
 }
 ```
