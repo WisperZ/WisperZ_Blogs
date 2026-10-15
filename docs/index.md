@@ -1,3 +1,15 @@
+---
+id: home
+title: 首页
+description: 记录编程、嵌入式、Linux、硬件通信与工程实践的个人知识库。
+status: Done
+created: null
+updated: null
+tags:
+  - index.md
+aliases: []
+---
+
 # 👋 欢迎来到 WisperZ Blogs
 
 **嵌入式 · 工程实践 · 工具链 · 生活碎片**  
@@ -41,4 +53,4 @@
 
 ---
 
-*码农一枚，记录一些代码与日子的交集*
+*记录一些代码与日子的交集*

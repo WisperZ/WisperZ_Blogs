@@ -1,0 +1,21 @@
+---
+id: solid-reference
+title: SOLID 速查
+description: 汇总 SOLID 五项面向对象设计原则。
+status: Todo
+created: null
+updated: null
+tags:
+  - 编程与软件设计
+aliases: []
+---
+
+# SOLID 速查 {#_1}
+
+面向对象设计原则：**SOLID**，这其实是五个设计原则的缩写，分别是
+
+- 单一职责原则（Single responsibility principle，SRP）
+- 开放封闭原则（Open–closed principle，OCP）
+- Liskov 替换原则（Liskov substitution principle，LSP）
+- 接口隔离原则（Interface segregation principle，ISP）
+- 依赖倒置原则（Dependency inversion principle，DIP）

@@ -1,1 +1,7 @@
 site/
+
+.venv/
+.zensical-preview.toml
+
+# Local assistant conversations
+.goose/

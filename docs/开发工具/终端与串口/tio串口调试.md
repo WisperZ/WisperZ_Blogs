@@ -1,0 +1,237 @@
+---
+id: tio-serial
+title: tio 串口调试
+description: 记录 Windows Terminal 中使用 tio 选择串口和采集日志的方法。
+status: Todo
+created: null
+updated: null
+tags:
+  - 开发工具
+aliases: []
+---
+
+# tio 串口调试 {#windows-terminal-tio}
+
+## 一、背景
+
+在 Windows 上，常见串口工具多为 GUI（如 XCOM、MobaXterm、SecureCRT）。  
+如果希望在 **终端环境中以类 Linux 方式使用串口**，可以选择开源工具 **tio**。
+
+`tio` 是一个轻量级串口终端工具，原生支持 Linux/macOS。  
+在 GitHub 上可以找到 Windows 版本的移植项目：
+
+[https://github.com/konosubakonoakua/tio-win](https://github.com/konosubakonoakua/tio-win)
+
+---
+
+## 二、准备工作
+
+### 1. 下载 tio（Windows 版）
+
+从仓库 Release 页面下载编译好的可执行文件，解压后将目录加入 `PATH`，确保在 PowerShell 中可直接使用：
+
+```powershell
+tio --version
+```
+
+若能正确输出版本信息，说明安装成功。
+
+---
+
+## 三、启动脚本设计（串口选择器）
+
+为了方便选择串口设备并自动记录日志，编写一个 PowerShell 启动脚本。
+
+**文件名：`tio_start.ps1`**
+
+```powershell
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+chcp 65001 | Out-Null
+
+# 1. 获取设备列表
+Write-Host "--- Available Serial Devices ---" -ForegroundColor Cyan
+$deviceList = tio --list
+$ports = @()
+
+# 直接沿用你原脚本的匹配逻辑，但改为存入数组并打印序号
+foreach ($line in $deviceList) {
+    if ($line -match '(/dev/tty\S+)') {
+        $found = $matches[1]
+        if ($ports -notcontains $found) {
+            $ports += $found
+            Write-Host (" {0}. {1}" -f $ports.Count, $found)
+        }
+    }
+}
+
+# 默认值处理：如果有设备，默认选1；没有则默认 /dev/ttyS1
+if ($ports.Count -gt 0) {
+    $defaultSelection = "1"
+    Write-Host "`n[Auto] Default selection: 1 ($($ports[0]))" -ForegroundColor Yellow
+} else {
+    $defaultSelection = "/dev/ttyS1"
+    Write-Host "`n[Auto] No devices found, default: $defaultSelection" -ForegroundColor Yellow
+}
+
+# 2. 交互输入
+Write-Host ""
+$input = (Read-Host "1. Select Port (Number or Path) [$defaultSelection]").Trim()
+if (!$input) { $input = $defaultSelection }
+
+# 3. 序号转路径逻辑
+# 如果输入的是数字，去数组里找对应的路径
+if ($input -match '^\d+$') {
+    $idx = [int]$input - 1
+    if ($idx -ge 0 -and $idx -lt $ports.Count) {
+        $p = $ports[$idx]
+    } else {
+        # 如果数字超标，保持你原来的兜底逻辑
+        $p = "/dev/ttyS$input"
+    }
+} else {
+    $p = $input
+}
+
+# 后面的逻辑完全保持你原版不动
+$b = (Read-Host "2. Baud [115200]").Trim()
+if (!$b) { $b = "115200" }
+
+$f = (Read-Host "3. Flow (none/hard) [none]").Trim()
+if (!$f) { $f = "none" }
+
+if ($p -match '^\d+$') { 
+    $port = "/dev/ttyS$p" 
+} else { 
+    $port = $p 
+}
+
+# 4. 日志设置
+$logDir = "D:\log"
+if (!(Test-Path $logDir)) { New-Item -ItemType Directory -Path $logDir -Force }
+$cleanName = $port -replace '[\\/]', '_'
+$fn = Join-Path $logDir "${cleanName}_${b}_$(Get-Date -f 'MMdd_HHmm').log"
+
+# 5. 启动连接
+Write-Host "`n>> Connecting to $port ($b)..." -ForegroundColor Green
+Write-Host ">> Log: $fn" -ForegroundColor Yellow
+
+tio -b $b -f $f -t --timestamp-format iso8601 -L --log-file $fn $port
+
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "`n[ERROR] tio exited with code $LASTEXITCODE." -ForegroundColor Red
+    Pause
+}
+```
+
+---
+
+## 四、集成到 Windows Terminal
+
+为了像“内置工具”一样使用 tio，可将其加入 Windows Terminal 的 profile 配置。
+
+### 打开配置文件
+
+Windows Terminal → 设置 → 左下角 **打开 JSON 文件**
+
+### 在 `profiles.list` 中添加：
+
+```json
+{
+  "name": "Tio 串口选择器 (脚本版)",
+  "commandline": "powershell.exe -ExecutionPolicy Bypass -File \"D:\\\\Tools\\\\tio\\\\tio_start.ps1\"",
+  "icon": "⚡",
+  "font": {
+    "face": "Cascadia Code"
+  },
+  "colorScheme": "One Half Dark",
+  "useAcrylic": true,
+  "acrylicOpacity": 0.7,
+  "closeOnExit": "graceful"
+}
+```
+
+> ⚠ 注意：JSON 中路径必须使用双反斜杠 `\\`，否则 Windows Terminal 会报错。
+
+保存后重启 Windows Terminal，即可在新建标签页中看到该入口。
+
+---
+
+## 五、使用说明
+
+1. 打开 Windows Terminal  
+2. 新建标签页 → 选择：
+
+```text
+Tio 串口选择器 (脚本版)
+```
+
+3. 脚本会列出可用串口：
+
+```text
+tio --list
+```
+
+4. 输入：
+- `3` → 使用 COM3  
+- `/dev/ttyS22` → 使用该路径  
+
+5. 自动生成日志文件，例如：
+
+```text
+D:\log\COM3_20260205_1030.log
+```
+
+退出方式：
+
+```text
+Ctrl + t 然后 q
+```
+
+---
+
+## 六、补充说明
+
+### 1. 关于 `/dev/ttySxx` 与 COM 端口
+
+在 tio-win 的实现中：
+
+```text
+/dev/ttyS0  ≈ COM1
+/dev/ttyS1  ≈ COM2
+...
+```
+
+不同版本映射可能不同，因此建议：
+
+👉 **优先使用 COMx 方式输入最稳妥**
+
+---
+
+### 2. 适合使用 tio 的场景
+
+适合：
+
+- 串口调试嵌入式设备  
+- 长时间日志采集  
+- 与 Linux 上 tio 使用体验保持一致  
+- 自动记录日志文件  
+
+不适合：
+
+- 需要 XMODEM/YMODEM 传文件  
+- 需要 GUI 配置复杂参数的场景  
+
+---
+
+## 七、总结
+
+该方案实现了：
+
+- 在 Windows Terminal 中原生使用串口  
+- 类 Linux 风格操作体验  
+- 自动生成带时间戳的日志文件  
+- 避免 GUI 串口工具对编码和复制粘贴的限制  
+
+适合：
+
+> 习惯终端工作流、需要长时间串口日志采集的用户。

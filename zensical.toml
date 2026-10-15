@@ -1,4 +1,153 @@
 [project]
+extra_css = ["stylesheets/status.css"]
+nav = [
+  { "首页" = "index.md" },
+  { "编程与软件设计" = [
+    { "概览" = "编程与软件设计/index.md" },
+    { "C语言" = [
+      { "C 语言基础" = "编程与软件设计/C语言/C语言基础.md" },
+      { "C 语言编码规范" = "编程与软件设计/C语言/C语言编码规范.md" },
+      { "位域与位图" = "编程与软件设计/C语言/位域与位图.md" },
+      { "树与数据结构" = "编程与软件设计/C语言/树与数据结构.md" },
+      { "栈" = "编程与软件设计/C语言/栈.md" },
+      { "函数指针与钩子函数" = "编程与软件设计/C语言/函数指针与钩子函数.md" },
+      { "指针与参数传递" = "编程与软件设计/C语言/指针与参数传递.md" },
+    ] },
+    { "并发编程" = [
+      { "锁的选择" = "编程与软件设计/并发编程/锁的选择.md" },
+    ] },
+    { "设计原则" = [
+      { "SOLID 速查" = "编程与软件设计/设计原则/SOLID速查.md" },
+      { "软件设计七大原则" = "编程与软件设计/设计原则/软件设计七大原则.md" },
+    ] },
+    { "建模" = [
+      { "UML 时序图" = "编程与软件设计/建模/UML时序图.md" },
+    ] },
+  ] },
+  { "嵌入式开发" = [
+    { "概览" = "嵌入式开发/index.md" },
+    { "构建与链接" = [
+      { "GNU 链接脚本基础" = "嵌入式开发/构建与链接/GNU链接脚本基础.md" },
+      { "段与内存布局" = "嵌入式开发/构建与链接/段与内存布局.md" },
+      { "Kconfig 与 Kbuild" = "嵌入式开发/构建与链接/Kconfig与Kbuild.md" },
+    ] },
+    { "汇编" = [
+      { "内嵌汇编" = "嵌入式开发/汇编/内嵌汇编.md" },
+      { "汇编语句速记" = "嵌入式开发/汇编/汇编语句速记.md" },
+    ] },
+    { "处理器与启动" = [
+      { "ARM 多核启动" = "嵌入式开发/处理器与启动/ARM多核启动.md" },
+      { "Cortex-M 与 RTOS 启动流程" = "嵌入式开发/处理器与启动/Cortex-M与RTOS启动流程.md" },
+      { "RISC-V 链接与启动脚本分析" = "嵌入式开发/处理器与启动/RISC-V链接与启动脚本分析.md" },
+    ] },
+    { "操作系统 / OpenHarmony" = [
+      { "OpenHarmony 源码下载与编译" = "嵌入式开发/操作系统/OpenHarmony/OpenHarmony源码下载与编译.md" },
+    ] },
+    { "操作系统 / OpenVela" = [
+      { "OpenVela 环境与源码" = "嵌入式开发/操作系统/OpenVela/OpenVela环境与源码.md" },
+    ] },
+    { "操作系统 / Zephyr" = [
+      { "Zephyr 开发环境搭建" = "嵌入式开发/操作系统/Zephyr/Zephyr开发环境搭建.md" },
+    ] },
+  ] },
+  { "Linux与云计算" = [
+    { "概览" = "Linux与云计算/index.md" },
+    { "内核与并发" = [
+      { "Linux 内核概述" = "Linux与云计算/内核与并发/Linux内核概述.md" },
+      { "线程同步与互斥" = "Linux与云计算/内核与并发/线程同步与互斥.md" },
+    ] },
+    { "系统管理" = [
+      { "Ubuntu 常用命令" = "Linux与云计算/系统管理/Ubuntu常用命令.md" },
+      { "HTTP 文件服务" = "Linux与云计算/系统管理/HTTP文件服务.md" },
+    ] },
+    { "开发环境" = [
+      { "WSL 备份与配置" = "Linux与云计算/开发环境/WSL备份与配置.md" },
+      { "WSL2 安装 Cubic" = "Linux与云计算/开发环境/WSL2安装Cubic.md" },
+    ] },
+    { "云平台 / KubeEdge" = [
+      { "WSL2 部署 KubeEdge" = "Linux与云计算/云平台/KubeEdge/WSL2部署KubeEdge.md" },
+    ] },
+    { "云平台 / OpenStack" = [
+      { "DevStack 部署 OpenStack" = "Linux与云计算/云平台/OpenStack/DevStack部署OpenStack.md" },
+      { "Kolla-Ansible 部署 OpenStack Zed" = "Linux与云计算/云平台/OpenStack/Kolla-Ansible部署OpenStack-Zed.md" },
+    ] },
+  ] },
+  { "硬件与通信" = [
+    { "概览" = "硬件与通信/index.md" },
+    { "基础元器件" = [
+      { "电阻" = "硬件与通信/基础元器件/电阻.md" },
+      { "电容" = "硬件与通信/基础元器件/电容.md" },
+      { "电感与磁珠" = "硬件与通信/基础元器件/电感与磁珠.md" },
+      { "二极管" = "硬件与通信/基础元器件/二极管.md" },
+      { "晶体三极管" = "硬件与通信/基础元器件/晶体三极管.md" },
+      { "场效应管" = "硬件与通信/基础元器件/场效应管.md" },
+    ] },
+    { "通信接口" = [
+      { "UART" = "硬件与通信/通信接口/UART.md" },
+      { "I2C" = "硬件与通信/通信接口/I2C.md" },
+      { "SPI" = "硬件与通信/通信接口/SPI.md" },
+    ] },
+    { "无线通信" = [
+      { "LoRa 与 LoRaWAN" = "硬件与通信/无线通信/LoRa与LoRaWAN.md" },
+    ] },
+  ] },
+  { "开发工具" = [
+    { "概览" = "开发工具/index.md" },
+    { "版本控制" = [
+      { "Git 常用操作" = "开发工具/版本控制/Git常用操作.md" },
+      { "Git 速查" = "开发工具/版本控制/Git速查.md" },
+    ] },
+    { "持续集成" = [
+      { "GitLab CI/CD" = "开发工具/持续集成/GitLab-CICD.md" },
+    ] },
+    { "终端与串口" = [
+      { "Windows 终端美化" = "开发工具/终端与串口/Windows终端美化.md" },
+      { "tio 串口调试" = "开发工具/终端与串口/tio串口调试.md" },
+    ] },
+    { "网络与安全" = [
+      { "FRP 配置与测试" = "开发工具/网络与安全/FRP配置与测试.md" },
+      { "FRP 历史配置" = "开发工具/网络与安全/FRP历史配置.md" },
+      { "TLS 双向认证" = "开发工具/网络与安全/TLS双向认证.md" },
+    ] },
+  ] },
+  { "数据编码与图像" = [
+    { "概览" = "数据编码与图像/index.md" },
+    { "数据编码" = [
+      { "Base64" = "数据编码与图像/数据编码/Base64.md" },
+    ] },
+    { "图像压缩" = [
+      { "JPEG 编码原理" = "数据编码与图像/图像压缩/JPEG编码原理.md" },
+    ] },
+  ] },
+  { "项目实践" = [
+    { "概览" = "项目实践/index.md" },
+    { "AUTOSAR" = [
+      { "EasyXMen 环境搭建" = "项目实践/AUTOSAR/EasyXMen环境搭建.md" },
+    ] },
+    { "RISC-V" = [
+      { "RISC-V 开发环境搭建" = "项目实践/RISC-V/RISC-V开发环境搭建.md" },
+    ] },
+    { "OpenHarmony" = [
+      { "SCM630 开发实践" = "项目实践/OpenHarmony/SCM630开发实践.md" },
+    ] },
+    { "RK35xx" = [
+      { "RK3588 固件与 iSulad" = "项目实践/RK35xx/RK3588固件与iSulad.md" },
+      { "RK3566 适配 5G 驱动" = "项目实践/RK35xx/RK3566适配5G驱动.md" },
+      { "RM500U 驱动与联网" = "项目实践/RK35xx/RM500U驱动与联网.md" },
+      { "单独更新内核与 5G 驱动" = "项目实践/RK35xx/单独更新内核与5G驱动.md" },
+      { "开发板镜像与网络验证" = "项目实践/RK35xx/开发板镜像与网络验证.md" },
+      { "泰山派 Ubuntu 镜像制作" = "项目实践/RK35xx/泰山派Ubuntu镜像制作.md" },
+    ] },
+    { "大疆PSDK" = [
+      { "PSDK 的 Linux 环境" = "项目实践/大疆PSDK/PSDK的Linux环境.md" },
+    ] },
+    { "电力与仪表" = [
+      { "无功补偿器网页设计" = "项目实践/电力与仪表/无功补偿器网页设计.md" },
+      { "ML307C 气表开发环境" = "项目实践/电力与仪表/ML307C气表开发环境.md" },
+    ] },
+  ] },
+]
+extra_javascript = ["javascripts/status-tooltips.js"]
 site_name = "WisperZ's Blog"
 site_url = "https://wisperz.github.io/WisperZ_Blogs"
 
@@ -64,15 +213,12 @@ toggle = { icon = "material/toggle-switch-off-outline", name = "切换至日间�
 separator = "[\\s\\u200b\\-]"
 
 [project.plugins.blog]
+enabled = false
 post_date_format = "full"
 draft = true
 post_readtime = true
 post_readtime_words_per_minute = 265
 
-nav = [
-    { "Home"  = "index.md" },
-    { "About" = "about.md" },
-]
 
 # =========================================================
 # Markdown 扩展（关键：修复你当前的格式问题）
@@ -84,7 +230,6 @@ abbr = {}
 attr_list = {}
 admonition = {}
 
-fenced_code = {}
 tables = {}
 footnotes = {}
 
@@ -93,14 +238,17 @@ toc = { permalink = true }
 
 # ---- pymdown-extensions（强烈建议） ----
 
-[pymdownx.highlight]
+[project.markdown_extensions.pymdownx.highlight]
+anchor_linenums = true
+line_spans = "__span"
+pygments_lang_class = true
 linenums = false
 guess_lang = true
 
-[pymdownx.superfences]
+[project.markdown_extensions.pymdownx.superfences]
 # 让代码块、嵌套块稳定解析
 
-[pymdownx.inlinehilite]
+[project.markdown_extensions.pymdownx.inlinehilite]
 # 支持 `==` 内联代码高亮
 
 [pymdownx.details]
@@ -118,3 +266,82 @@ guess_lang = true
 [pymdownx.keys]
 # ++ctrl+c++
 
+[project.extra.status]
+Done = "已完成"
+InProgress = "进行中"
+Archive = "已归档"
+Todo = "待完善"
+
+# 目录整理前的文章地址
+[project.plugins.redirects.redirect_maps]
+"C语言/C语言.md" = "编程与软件设计/C语言/C语言基础.md"
+"C语言/C语言编码规范.md" = "编程与软件设计/C语言/C语言编码规范.md"
+"C语言/其他.md" = "编程与软件设计/C语言/位域与位图.md"
+"C语言/数据结构.md" = "编程与软件设计/C语言/树与数据结构.md"
+"C语言/栈.md" = "编程与软件设计/C语言/栈.md"
+"C语言/钩子函数.md" = "编程与软件设计/C语言/函数指针与钩子函数.md"
+"C语言/随记.md" = "编程与软件设计/C语言/指针与参数传递.md"
+"C语言/锁.md" = "编程与软件设计/并发编程/锁的选择.md"
+"工具与方法/其他/设计原理.md" = "编程与软件设计/设计原则/SOLID速查.md"
+"工具与方法/其他/软件设计模式——七大设计原则.md" = "编程与软件设计/设计原则/软件设计七大原则.md"
+"工具与方法/UML/UML时序图.md" = "编程与软件设计/建模/UML时序图.md"
+"C语言/链接脚本.md" = "嵌入式开发/构建与链接/GNU链接脚本基础.md"
+"嵌入式/链接脚本/链接脚本.md" = "嵌入式开发/构建与链接/段与内存布局.md"
+"嵌入式/menuconfig/Menuconfig&Kbuild.md" = "嵌入式开发/构建与链接/Kconfig与Kbuild.md"
+"嵌入式/汇编/内嵌汇编.md" = "嵌入式开发/汇编/内嵌汇编.md"
+"嵌入式/汇编/汇编语句.md" = "嵌入式开发/汇编/汇编语句速记.md"
+"Linux/多核启动.md" = "嵌入式开发/处理器与启动/ARM多核启动.md"
+"操作系统/嵌入式操作系统/嵌入式操作系统启动过程.md" = "嵌入式开发/处理器与启动/Cortex-M与RTOS启动流程.md"
+"项目实践/RISC-V/RISC-V链接文件&启动脚本分析.md" = "嵌入式开发/处理器与启动/RISC-V链接与启动脚本分析.md"
+"操作系统/OpenHarmony/OpenHarmony下载及编译.md" = "嵌入式开发/操作系统/OpenHarmony/OpenHarmony源码下载与编译.md"
+"操作系统/OpenVela/环境部署及源码下载.md" = "嵌入式开发/操作系统/OpenVela/OpenVela环境与源码.md"
+"操作系统/Zephyr/环境搭建.md" = "嵌入式开发/操作系统/Zephyr/Zephyr开发环境搭建.md"
+"Linux/Linux内核学习笔记-内核概述.md" = "Linux与云计算/内核与并发/Linux内核概述.md"
+"Linux/同步互斥.md" = "Linux与云计算/内核与并发/线程同步与互斥.md"
+"Linux/Ubuntu常用命令.md" = "Linux与云计算/系统管理/Ubuntu常用命令.md"
+"Linux/创建文件服务.md" = "Linux与云计算/系统管理/HTTP文件服务.md"
+"Linux/WSL.md" = "Linux与云计算/开发环境/WSL备份与配置.md"
+"Linux/WSL2安装cubic.md" = "Linux与云计算/开发环境/WSL2安装Cubic.md"
+"Linux/WSL2 Ubuntu22.04部署KubeEdge.md" = "Linux与云计算/云平台/KubeEdge/WSL2部署KubeEdge.md"
+"Linux/云服务器部署/部署OpenStack.md" = "Linux与云计算/云平台/OpenStack/DevStack部署OpenStack.md"
+"Linux/云服务器部署/Ubuntu22.04部署OpenStack-zed all-in-one.md" = "Linux与云计算/云平台/OpenStack/Kolla-Ansible部署OpenStack-Zed.md"
+"硬件&半导体/基础知识/基本元器件-00-电阻.md" = "硬件与通信/基础元器件/电阻.md"
+"硬件&半导体/基础知识/基本元器件-01-电容.md" = "硬件与通信/基础元器件/电容.md"
+"硬件&半导体/基础知识/基本元器件-02-电感与磁珠.md" = "硬件与通信/基础元器件/电感与磁珠.md"
+"硬件&半导体/基础知识/基本元器件-03-二极管.md" = "硬件与通信/基础元器件/二极管.md"
+"硬件&半导体/基础知识/基本元器件-04-晶体三极管.md" = "硬件与通信/基础元器件/晶体三极管.md"
+"硬件&半导体/基础知识/基础元器件-05-场效应管.md" = "硬件与通信/基础元器件/场效应管.md"
+"硬件&半导体/通信协议/通信协议-00-UART.md" = "硬件与通信/通信接口/UART.md"
+"硬件&半导体/通信协议/通信协议-01-I2C.md" = "硬件与通信/通信接口/I2C.md"
+"硬件&半导体/通信协议/通信协议-02-SPI.md" = "硬件与通信/通信接口/SPI.md"
+"硬件&半导体/嵌入式模块/嵌入式模块-00-LoRa.md" = "硬件与通信/无线通信/LoRa与LoRaWAN.md"
+"工具与方法/GIT/Git常用操作.md" = "开发工具/版本控制/Git常用操作.md"
+"工具与方法/GIT/Git早期速查.md" = "开发工具/版本控制/Git速查.md"
+"工具与方法/GIT/Gitlab-CICD.md" = "开发工具/持续集成/GitLab-CICD.md"
+"工具与方法/其他/terminal_美化.md" = "开发工具/终端与串口/Windows终端美化.md"
+"工具&其他/基于tio的终端串口方案.md" = "开发工具/终端与串口/tio串口调试.md"
+"工具与方法/FRP内网穿透/Frp内网穿透配置.md" = "开发工具/网络与安全/FRP配置与测试.md"
+"工具与方法/FRP内网穿透/历史配置/FRP内网穿透.md" = "开发工具/网络与安全/FRP历史配置.md"
+"工具与方法/其他/双向认证.md" = "开发工具/网络与安全/TLS双向认证.md"
+"工具与方法/Base64/Base64.md" = "数据编码与图像/数据编码/Base64.md"
+"图像处理/JPEG编码协议-编码原理-压缩版.md" = "数据编码与图像/图像压缩/JPEG编码原理.md"
+"项目实践/AUTOSAR/普华小满EasyXMen/环境搭建.md" = "项目实践/AUTOSAR/EasyXMen环境搭建.md"
+"操作系统/OpenHarmony/OpenHarmony开发指南.md" = "项目实践/OpenHarmony/SCM630开发实践.md"
+"项目实践/其他/开发板固件及iSula指南.md" = "项目实践/RK35xx/RK3588固件与iSulad.md"
+"项目实践/大疆无人机相关/RK3566添加5G驱动.md" = "项目实践/RK35xx/RK3566适配5G驱动.md"
+"项目实践/大疆无人机相关/RM500U驱动使用.md" = "项目实践/RK35xx/RM500U驱动与联网.md"
+"项目实践/大疆无人机相关/单独更新Linux内核以及添加5G驱动.md" = "项目实践/RK35xx/单独更新内核与5G驱动.md"
+"项目实践/大疆无人机相关/新开发板验证.md" = "项目实践/RK35xx/开发板镜像与网络验证.md"
+"项目实践/大疆无人机相关/泰山派Ubuntu镜像制作.md" = "项目实践/RK35xx/泰山派Ubuntu镜像制作.md"
+"项目实践/大疆无人机相关/配置PSDK的Linux环境.md" = "项目实践/大疆PSDK/PSDK的Linux环境.md"
+"项目实践/无功补偿器/无功补偿器网页设计.md" = "项目实践/电力与仪表/无功补偿器网页设计.md"
+"项目实践/气表/气表开发环境搭建.md" = "项目实践/电力与仪表/ML307C气表开发环境.md"
+"C语言/index.md" = "编程与软件设计/index.md"
+"Linux/index.md" = "Linux与云计算/index.md"
+"图像处理/index.md" = "数据编码与图像/index.md"
+"嵌入式/index.md" = "嵌入式开发/index.md"
+"工具&其他/index.md" = "开发工具/index.md"
+"工具与方法/index.md" = "开发工具/index.md"
+"操作系统/index.md" = "嵌入式开发/index.md"
+"硬件&半导体/index.md" = "硬件与通信/index.md"
+"C语言/C语言编码规范_边界智能.md" = "编程与软件设计/C语言/C语言编码规范.md"
